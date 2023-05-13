@@ -102,7 +102,7 @@ map('n', '<leader>dv', "<Cmd>lua require('dap').step_over()<CR>", opts)
 map('n', '<leader>di', "<Cmd>lua require('dap').step_into()<CR>", opts)
 map('n', '<leader>do', "<Cmd>lua require('dap').step_out()<CR>", opts)
 map('n', '<leader>db', "<Cmd>lua require('dap').toggle_breakpoint()<CR>", opts)
-map('n', '<leader>dB', "<Cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: ')<CR>", opts)
+map('n', '<leader>dB', "<Cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", opts)
 map('n', '<leader>dr', "<Cmd>lua require('dap').repl.open()<CR>", opts)
 map('n', '<leader>dl', "<Cmd>lua require('dap').run_last()<CR>", opts)
 -- map('n', '<leader>dpb', "<Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>", opts)
@@ -123,9 +123,9 @@ map('n', '<leader>ct', '<Cmd>TSContextToggle<CR>', opts)
 
 -- session managment
 map('n', '<leader>ss', '<Cmd>Autosession search<CR>', opts)
-map('n', '<leader>sd', '<Cmd>DeleteSession<CR>', opts)
-map('n', '<leader>sr', '<Cmd>RestoreSession<CR>', opts)
-map('n', '<leader>sS', '<Cmd>SaveSession<CR>', opts)
+map('n', '<leader>sd', '<Cmd>SessionDelete<CR>', opts)
+map('n', '<leader>sr', '<Cmd>SessionRestore<CR>', opts)
+map('n', '<leader>sS', '<Cmd>SessionSave<CR>', opts)
 
 -- jot
 map('n', '<leader>j', '<Cmd>Jot<CR>', opts)

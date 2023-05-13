@@ -211,7 +211,8 @@ local plugins = {
     },
     {
         "samjwill/nvim-unception",
-        config = get_config("unception")
+        config = get_config("unception"),
+        enabled = false
     },
     {
     "SmiteshP/nvim-navbuddy",
