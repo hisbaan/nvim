@@ -2,11 +2,6 @@ local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 local expr_options = { noremap = true, expr = true, silent = true }
 
--- set leader key
-map('n', '<Space>', '<Nop>' , opts)
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
 -- better window navigation
 map("n", "<C-h>", "<C-w>h", opts)
 map("n", "<C-j>", "<C-w>j", opts)
@@ -42,9 +37,6 @@ map("n", "<C-Left>", ":vertical resize +1<CR>", opts)
 map("n", "<C-Right>", ":vertical resize -1<CR>", opts)
 map("n", "<C-Up>", ":resize -1<CR>", opts)
 map("n", "<C-Down>", ":resize +1<CR>", opts)
-
--- Autocorrect spelling from previous error
-map("i", "<c-f>", "<c-g>u<Esc>[s1z=`]a<c-g>u", opts)
 
 -- Move selected line / block of text in visual mode
 map("x", "K", ":move '<-2<CR>gv-gv", opts)
