@@ -39,8 +39,7 @@ opt.wildignore = [[
 -- Tabs & Indentation
 opt.tabstop = 4
 opt.shiftwidth = 4
-vim.cmd([[set nojoinspaces]])
--- o.nojoinspaces = true
+opt.joinspaces = false
 opt.expandtab = true -- convert tabs to spaces
 opt.smartindent = true -- make indenting smarter again
 opt.breakindent = true -- indent wrapped lines
@@ -51,7 +50,6 @@ opt.smartcase = true
 opt.incsearch = true
 
 -- Appearance
--- opt.background = "dark"
 opt.cursorline = true
 wo.rnu = true
 wo.number = true
