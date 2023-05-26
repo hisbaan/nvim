@@ -27,4 +27,4 @@ local opts = {
         border = "rounded"
     }
 }
-require('lazy').setup("configs", opts)
+require('lazy').setup("config", opts)
