@@ -10,31 +10,31 @@ return {
     config = function()
         local cmp = require('cmp')
         local kind_icons = {
-            Text = "",
-            Method = "",
-            Function = "",
+            Text = "󰉿",
+            Method = "󰆧",
+            Function = "󰊕",
             Constructor = "",
-            Field = "ﰠ",
+            Field = "󰜢",
             Variable = "",
-            Class = "ﴯ",
+            Class = "󰠱",
             Interface = "",
             Module = "",
-            Property = "ﰠ",
+            Property = "󰜢",
             Unit = "",
-            Value = "",
+            Value = "󰎠",
             Enum = "",
-            Keyword = "",
+            Keyword = "󰌋",
             Snippet = "",
-            Color = "",
-            File = "",
+            Color = "󰏘",
+            File = "󰈙",
             Reference = "",
-            Folder = "",
+            Folder = "󰉋",
             EnumMember = "",
-            Constant = "",
-            Struct = "פּ",
+            Constant = "󰏿",
+            Struct = "󰙅",
             Event = "",
-            Operator = "",
-            TypeParameter = ""
+            Operator = "󰆕",
+            TypeParameter = "󰅲"
         }
 
         vim.o.completeopt = "menuone,noselect"
@@ -75,17 +75,6 @@ return {
                     select = false,
                 }),
             },
-            -- mapping = {
-            -- 	['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-            -- 	['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-            -- 	['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-            -- 	['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-            -- 	['<C-e>'] = cmp.mapping({
-            -- 		i = cmp.mapping.abort(),
-            -- 		c = cmp.mapping.close(),
-            -- 	}),
-            -- 	['<CR>'] = cmp.mapping.confirm({ select = true }),
-            -- },
             sources = cmp.config.sources(
                 {
                     { name = 'nvim_lsp' },
