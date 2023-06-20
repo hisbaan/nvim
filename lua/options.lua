@@ -39,6 +39,7 @@ opt.wildignore = [[
 -- Tabs & Indentation
 opt.tabstop = 4
 opt.shiftwidth = 4
+opt.textwidth = 0
 opt.joinspaces = false
 opt.expandtab = true -- convert tabs to spaces
 opt.smartindent = true -- make indenting smarter again

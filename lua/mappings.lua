@@ -70,7 +70,7 @@ map('n', '<Leader>f', '<Cmd>NvimTreeToggle<CR>', opts)
 -- Telescope
 map('n', '<Leader><Space>', '<Cmd>Telescope find_files<CR>', opts)
 map('n', '<Leader>b', '<Cmd>Telescope buffers<CR>', opts)
-map('n', '<Leader>g', '<Cmd>Telescope live_grep<CR>', opts)
+map('n', '<Leader>tg', '<Cmd>Telescope live_grep<CR>', opts)
 map('n', '<Leader>.', "<Cmd>lua require 'telescope'.extensions.file_browser.file_browser()<CR>", opts)
 
 -- Terminal
@@ -79,6 +79,10 @@ map('n', '<Leader>te', '<Cmd>!wezterm start --cwd "$PWD" --always-new-process & 
 
 -- Neogit
 map('n', '<Leader>gg', '<Cmd>Neogit<CR>', opts)
+
+-- Gitsigns
+map('n', '<Leader>gn', '<Cmd>Gitsigns next_hunk<CR>', opts)
+map('n', '<Leader>gp', '<Cmd>Gitsigns prev_hunk<CR>', opts)
 
 -- todo-comments
 map('n', '<Leader>td', '<Cmd>TodoTelescope<CR>', opts)
