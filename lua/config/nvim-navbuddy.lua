@@ -1,9 +1,14 @@
+local opts = require('opts')
+
 return {
     "SmiteshP/nvim-navbuddy",
     dependencies = {
         "neovim/nvim-lspconfig",
         "SmiteshP/nvim-navic",
         "MunifTanjim/nui.nvim"
+    },
+    keys = {
+        { '<leader>ln', '<Cmd>Navbuddy<CR>', opts, desc = "Navigate Nodes" },
     },
     config = function()
         local navbuddy = require("nvim-navbuddy")

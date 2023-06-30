@@ -1,6 +1,12 @@
+local opts = require('opts')
+
 return {
 	'lewis6991/gitsigns.nvim',
 	dependencies = { 'nvim-lua/plenary.nvim' },
+	keys = {
+		{ '<Leader>gn', '<Cmd>Gitsigns next_hunk<CR>', opts, desc = "Next Hunk" },
+		{ '<Leader>gp', '<Cmd>Gitsigns prev_hunk<CR>', opts, desc = "Prev Hunk" },
+	},
 	config = function()
 		require('gitsigns').setup {
 			signs = {

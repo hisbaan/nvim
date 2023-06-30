@@ -1,6 +1,11 @@
+local opts = require('opts')
+
 return {
     'nvim-treesitter/nvim-treesitter-context',
     enabled = false,
+    keys = {
+        { '<leader>ct', '<Cmd>TSContextToggle<CR>', opts, desc = "Toggle Treesitter Context" },
+    },
     config = function()
         require 'treesitter-context'.setup {
             enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)

@@ -1,5 +1,10 @@
+local opts = require('opts')
+
 return {
     'nvim-tree/nvim-tree.lua',
+    keys = {
+        { '<Leader>f', '<Cmd>NvimTreeToggle<CR>', opts, desc = "NvimTree" },
+    },
     config = function()
         vim.g.loaded_netrw = 1
         vim.g.loaded_netrwPlugin = 1
