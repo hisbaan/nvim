@@ -1,5 +1,13 @@
+local opts = require('opts')
+
 return {
     'rmagatti/auto-session',
+    keys = {
+        { '<leader>ss', '<Cmd>Autosession search<CR>', opts, desc = "Search Sessions" },
+        { '<leader>sd', '<Cmd>SessionDelete<CR>', opts, desc = "Delete Session" },
+        { '<leader>sr', '<Cmd>SessionRestore<CR>', opts, desc = "Restore Session" },
+        { '<leader>sS', '<Cmd>SessionSave<CR>', opts, desc = "Save Session" },
+    },
     config = function()
         require("auto-session").setup {
             log_level = "error",

@@ -1,6 +1,11 @@
+local opts = require('opts')
+
 return {
     'folke/todo-comments.nvim',
     dependencies = 'nvim-lua/plenary.nvim',
+    keys = {
+        { '<Leader>td', '<Cmd>TodoTelescope<CR>', opts, desc = "View TODOs" },
+    },
     config = function()
         require("todo-comments").setup({
             signs = true, -- show icons in the signs column

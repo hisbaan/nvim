@@ -1,6 +1,11 @@
+local opts = require('opts')
+
 return {
     'TimUntersberger/neogit',
     dependencies = 'nvim-lua/plenary.nvim',
+    keys = {
+        { '<Leader>gg', '<Cmd>Neogit<CR>', opts, desc = "Neogit" }
+    },
     config = function()
         local neogit = require('neogit')
 
