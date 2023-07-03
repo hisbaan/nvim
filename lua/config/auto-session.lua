@@ -8,6 +8,7 @@ return {
         { '<leader>sr', '<Cmd>SessionRestore<CR>', opts, desc = "Restore Session" },
         { '<leader>sS', '<Cmd>SessionSave<CR>', opts, desc = "Save Session" },
     },
+    lazy = false,
     config = function()
         require("auto-session").setup {
             log_level = "error",

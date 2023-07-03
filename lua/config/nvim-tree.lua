@@ -5,6 +5,7 @@ return {
     keys = {
         { '<Leader>f', '<Cmd>NvimTreeToggle<CR>', opts, desc = "NvimTree" },
     },
+    lazy = false,
     config = function()
         vim.g.loaded_netrw = 1
         vim.g.loaded_netrwPlugin = 1
