@@ -6,6 +6,7 @@ return {
     keys = {
         { '<Leader>td', '<Cmd>TodoTelescope<CR>', opts, desc = "View TODOs" },
     },
+    lazy = false,
     config = function()
         require("todo-comments").setup({
             signs = true, -- show icons in the signs column
