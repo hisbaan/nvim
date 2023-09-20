@@ -81,6 +81,7 @@ return {
                         TelescopeSelectionCaret = { bg = cp.surface0 },
                         -- Folds
                         UfoFoldedBg = { bg = cp.mantle },
+                        UfoFoldedEllipsis = { fg = cp.surface2, bg = cp.mantle },
                         Folded = { bg = cp.mantle },
                         Visual = { bg = cp.surface0 },
                         -- org-bullets
