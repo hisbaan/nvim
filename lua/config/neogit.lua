@@ -1,7 +1,5 @@
 local opts = require('opts')
 
-
-
 return {
     'NeogitOrg/neogit',
     dependencies = 'nvim-lua/plenary.nvim',
@@ -70,26 +68,50 @@ return {
             },
             -- Setting any section to `false` will make the section not render at all
             sections = {
+                -- Reverting/Cherry Picking
+                sequencer = {
+                    folded = false,
+                    hidden = false,
+                },
                 untracked = {
-                    folded = false
+                    folded = false,
+                    hidden = false,
                 },
                 unstaged = {
-                    folded = false
+                    folded = false,
+                    hidden = false,
                 },
                 staged = {
-                    folded = false
+                    folded = false,
+                    hidden = false,
                 },
                 stashes = {
-                    folded = true
+                    folded = true,
+                    hidden = false,
                 },
-                unpulled = {
-                    folded = true
+                unpulled_upstream = {
+                    folded = true,
+                    hidden = false,
                 },
-                unmerged = {
-                    folded = false
+                unmerged_upstream = {
+                    folded = false,
+                    hidden = false,
+                },
+                unpulled_pushRemote = {
+                    folded = true,
+                    hidden = false,
+                },
+                unmerged_pushRemote = {
+                    folded = false,
+                    hidden = false,
                 },
                 recent = {
-                    folded = true
+                    folded = true,
+                    hidden = false,
+                },
+                rebase = {
+                    folded = true,
+                    hidden = false,
                 },
             },
         }

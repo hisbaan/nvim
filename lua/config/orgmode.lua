@@ -11,7 +11,7 @@ return {
                 -- disable = {'org'}, -- Remove this to use TS highlighter for some of the highlights (Experimental)
                 additional_vim_regex_highlighting = { 'org' }, -- Required since TS highlighter doesn't support all syntax features (conceal)
             },
-            ensure_installed = { 'org' },              -- Or run :TSUpdate org
+            ensure_installed = { 'org' },                      -- Or run :TSUpdate org
         }
 
         require('orgmode').setup({
@@ -22,6 +22,10 @@ return {
                     org_meta_return = { '<Leader><CR>', '<C-CR>' },
                     org_return = {}
                 }
+            },
+            emacs_config = {
+                executable_path = 'emacs',
+                config_path = '$HOME/.config/emacs/early-init.el',
             }
         })
     end
