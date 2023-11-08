@@ -88,6 +88,8 @@ return {
                         OrgBulletsDash = { fg = cp.flamingo, link = nil },
                         OrgBulletsPlus = { fg = cp.flamingo, link = nil },
                         OrgBulletsStar = { fg = cp.flamingo, link = nil },
+                        -- indent-blankline
+                        MiniIndentscopeSymbol = { fg = cp.mauve }
                     }
                 end,
             },
