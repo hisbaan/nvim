@@ -2,6 +2,7 @@ local lua_fn = require('map_utils').lua_fn
 
 vim.opt.tabstop = 2
 vim.opt_local.shiftwidth = 2
+vim.b.miniindentscope_disable = true
 
 -- Add <C-CR> insert mode binding to create new item
 vim.api.nvim_set_keymap('i', '<C-CR>', '<C-o><C-CR>', { noremap = false, silent = true })
@@ -46,3 +47,5 @@ if vim.g.colors_name == 'catppuccin' then
     vim.api.nvim_set_hl(0, 'OrgBulletsPlus', { fg = cp.flamingo, link = nil })
     vim.api.nvim_set_hl(0, 'OrgBulletsStar', { fg = cp.flamingo, link = nil })
 end
+
+
