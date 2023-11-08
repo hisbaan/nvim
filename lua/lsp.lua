@@ -28,8 +28,6 @@ local function on_attach(client, bufnr)
     map('n', '<C-s>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts);
     map('n', '<C-n>', '<cmd>lua vim.diagnostic.goto_next({float = {border = "rounded"}})<CR>', opts);
     map('n', '<C-p>', '<cmd>lua vim.diagnostic.goto_prev({float = {border = "rounded"}})<CR>', opts);
-
-    client.server_capabilities.semanticTokensProvider = nil
 end
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())

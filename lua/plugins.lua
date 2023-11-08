@@ -1,5 +1,5 @@
 -- set leader (needs to be done before lazy loads)
-vim.api.nvim_set_keymap('n', '<Space>', '<Nop>' , { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Space>', '<Nop>', { noremap = true, silent = true })
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
@@ -25,6 +25,10 @@ local opts = {
     },
     ui = {
         border = "rounded"
-    }
+    },
+    change_detection = {
+        enabled = true,
+        notify = false,
+    },
 }
 require('lazy').setup("config", opts)
