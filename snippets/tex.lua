@@ -137,6 +137,16 @@ local times = s("times", {
 })
 table.insert(snippets, times)
 
+local emph = s("em", {
+    t "\\emph{", i(1), t "}"
+})
+table.insert(snippets, emph)
+
+local bold = s("bf", {
+    t "\\textbf{", i(1), t "}"
+})
+table.insert(snippets, bold)
+
 local absolute_value = s("abs", {
     t "\\abs{", i(1, "x - a"), t "}"
 })
@@ -180,7 +190,7 @@ local set_integral = s("sint", {
 table.insert(snippets, set_integral)
 
 local integral = s("int", {
-    t "\\int_{", i(1, "f(x)"), t "} d", i(2, "x")
+    t "\\int{", i(1, "f(x)"), t "} d", i(2, "x")
 })
 table.insert(snippets, integral)
 
