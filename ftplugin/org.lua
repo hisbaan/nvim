@@ -1,5 +1,6 @@
 local lua_fn = require('map_utils').lua_fn
 
+vim.o.foldlevel = 99
 vim.opt.tabstop = 2
 vim.opt_local.shiftwidth = 2
 vim.b.miniindentscope_disable = true
@@ -36,10 +37,6 @@ vim.api.nvim_set_keymap('n', '<CR>', lua_fn(function() toggleTodoOrCheckBox() en
 
 vim.api.nvim_set_keymap('i', '<C-t>', '<Esc>m1^i<Space><Space><Esc>`1lla', { noremap = false, silent = true })
 vim.api.nvim_set_keymap('i', '<C-d>', '<Esc>m1^hh"_x"_x`1a', { noremap = false, silent = true })
-
-
--- vim.api.nvim_set_keymap('i', '<C-t>', lua_fn(function() indent() end), { noremap = false, silent = true })
--- vim.api.nvim_set_keymap('i', '<C-d>', lua_fun(function() dedent() end), { noremap = false, silent = true })
 
 if vim.g.colors_name == 'catppuccin' then
     local cp = require("catppuccin.palettes").get_palette()

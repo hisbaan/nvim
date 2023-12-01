@@ -4,7 +4,10 @@ return {
     config = function()
         -- indent scope highlighting
         require("mini.indentscope").setup({
-            symbol = "│"
+            symbol = "│",
+            options = {
+                border = "top"
+            },
         })
     end
 }

@@ -88,18 +88,22 @@ return {
             )
         })
 
-        -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-        cmp.setup.cmdline('/', {
-            sources = {
+        cmp.setup.filetype('gitcommit', {
+            sources = cmp.config.sources({
                 { name = 'buffer' },
-                { name = 'path' },
-            }
+            })
         })
 
-
-
+        -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+        cmp.setup.cmdline({ '/', '?' }, {
+            mapping = cmp.mapping.preset.cmdline(),
+            sources = {
+                { name = 'buffer' }
+            }
+        })
         -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
         cmp.setup.cmdline(':', {
+            mapping = cmp.mapping.preset.cmdline(),
             sources = cmp.config.sources({
                 { name = 'path' }
             }, {

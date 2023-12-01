@@ -1,17 +1,9 @@
 return {
     'kevinhwang91/nvim-ufo',
     dependencies = 'kevinhwang91/promise-async',
+    enabled = true,
     config = function()
         -- vim.wo.foldcolumn = '1'
-        vim.wo.foldlevel = 99 -- feel free to decrease the value
-        vim.wo.foldenable = true
-        vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
-
-        vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
-        vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
-        vim.keymap.set('n', 'zr', require('ufo').openFoldsExceptKinds)
-        vim.keymap.set('n', 'zm', require('ufo').closeFoldsWith)
-
         local filetypes = { org = '' }
 
         require("ufo").setup({
@@ -21,5 +13,14 @@ return {
                 return filetypes[ft] or { 'treesitter', 'indent' }
             end,
         })
+
+        vim.o.foldlevel = 99
+        vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+        vim.wo.foldenable = true
+
+        vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+        vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+        vim.keymap.set('n', 'zr', require('ufo').openFoldsExceptKinds)
+        vim.keymap.set('n', 'zm', require('ufo').closeFoldsWith)
     end
 }
