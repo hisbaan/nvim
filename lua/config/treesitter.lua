@@ -1,8 +1,9 @@
 return {
     'nvim-treesitter/nvim-treesitter',
     config = function()
-        require("nvim-treesitter.configs").setup {
+        require("nvim-treesitter.configs").setup({
             ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+            auto_install = false,
             ignore_install = {}, -- List of parsers to ignore installing
             sync_install = false,
             highlight = {
@@ -50,6 +51,6 @@ return {
                 extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
                 max_file_lines = 2000 -- Do not enable for files with more than specified lines
             }
-        }
+        })
     end
 }

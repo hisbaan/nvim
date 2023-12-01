@@ -76,10 +76,11 @@ lspconfig.volar.setup({
 })
 
 lspconfig.ltex.setup({
+    root_dir = lspconfig.util.root_pattern('*.tex'),
     on_attach = function(client, bufnr)
         on_attach(client, bufnr)
         require("ltex_extra").setup {
-            load_langs = { "en-CA", "en-US" },
+            load_langs = { "en-CA" },
             init_check = true,
             path = os.getenv("HOME") .. "/.config/nvim/dictionaries",
             log_level = "none",
