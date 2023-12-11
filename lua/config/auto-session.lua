@@ -12,7 +12,7 @@ return {
     config = function()
         require("auto-session").setup {
             log_level = "error",
-            auto_session_suppress_dirs = { "~/", "~/Downloads", "/", "~/.config/nvim" },
+            auto_session_suppress_dirs = { "~/", "~/Downloads", "/", "~/.config/nvim", "~/Documents/obsidian", "~/Documents/org" },
             post_restore_cmds = {
                 function()
                     vim.opt.cmdheight = 1
