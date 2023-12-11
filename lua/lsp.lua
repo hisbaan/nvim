@@ -75,6 +75,7 @@ lspconfig.volar.setup({
     handlers = handlers,
 })
 
+-- FIX this ltex_extra call is not working properly
 lspconfig.ltex.setup({
     root_dir = lspconfig.util.root_pattern('*.tex'),
     on_attach = function(client, bufnr)
@@ -88,9 +89,9 @@ lspconfig.ltex.setup({
     end,
     capabilities = capabilities,
     handlers = handlers,
+    filetypes = { 'latex', 'tex', 'bib' },
     settings = {
         ltex = {
-            disabled = { "markdown", "org", "gitcommit" },
             enabled = { "latex", "tex", "bib" },
             language = "en-CA",
             dictionary = { ["en-CA"] = { "Hisbaan", "Noorani" } },

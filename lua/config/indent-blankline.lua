@@ -15,7 +15,7 @@ return {
                     "lspinfo",
                     "org",
                     "lazy",
-                    "md",
+                    "markdown",
                     "man",
                     "help",
                     "gitcommit",
