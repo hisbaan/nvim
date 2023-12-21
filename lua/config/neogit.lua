@@ -10,10 +10,52 @@ return {
         local neogit = require("neogit")
 
         neogit.setup {
-            disable_signs = false,
+            -- Hides the hints at the top of the status buffer
             disable_hint = false,
-            disable_context_highlighting = false,
+            -- Disables changing the buffer highlights based on where the cursor is.
+            disable_context_highlighting = false, -- TODO open issue in neogit for context highlighting being broken
+            -- Disables signs for sections/items/hunks
+            disable_signs = false,
+            -- Do not ask to confirm the commit - just do it when the buffer is closed.
             disable_commit_confirmation = false,
+            -- Changes what mode the Commit Editor starts in. `true` will leave nvim in normal mode, `false` will change nvim to
+            -- insert mode, and `"auto"` will change nvim to insert mode IF the commit message is empty, otherwise leaving it in
+            -- normal mode.
+            disable_insert_on_commit = true,
+            -- When enabled, will watch the `.git/` directory for changes and refresh the status buffer in response to filesystem
+            -- events.
+            filewatcher = {
+                interval = 1000,
+                enabled = true,
+            },
+            -- "ascii"   is the graph the git CLI generates
+            -- "unicode" is the graph like https://github.com/rbong/vim-flog
+            graph_style = "ascii",
+            -- Used to generate URL's for branch popup action "pull request".
+            git_services = {
+                ["github.com"] = "https://github.com/${owner}/${repository}/compare/${branch_name}?expand=1",
+                ["bitbucket.org"] = "https://bitbucket.org/${owner}/${repository}/pull-requests/new?source=${branch_name}&t=1",
+                ["gitlab.com"] = "https://gitlab.com/${owner}/${repository}/merge_requests/new?merge_request[source_branch]=${branch_name}",
+            },
+            -- Allows a different telescope sorter. Defaults to 'fuzzy_with_index_bias'. The example below will use the native fzf
+            -- sorter instead. By default, this function returns `nil`.
+            telescope_sorter = function()
+                return require("telescope").extensions.fzf.native_fzf_sorter()
+            end,
+            -- Persist the values of switches/options within and across sessions
+            remember_settings = true,
+            -- Scope persisted settings on a per-project basis
+            use_per_project_settings = true,
+            -- Table of settings to never persist. Uses format "Filetype--cli-value"
+            ignored_settings = {
+                "NeogitPushPopup--force-with-lease",
+                "NeogitPushPopup--force",
+                "NeogitPullPopup--rebase",
+                "NeogitCommitPopup--allow-empty",
+                "NeogitRevertPopup--no-edit",
+            },
+            -- Set to false if you want to be responsible for creating _ALL_ keymappings
+            use_default_keymaps = true,
             -- Neogit refreshes its internal state after specific events, which can be expensive depending on the repository size.
             -- Disabling `auto_refresh` will make it so you have to manually refresh the status after you open it.
             auto_refresh = true,
@@ -22,99 +64,59 @@ return {
             -- Flag description: https://git-scm.com/docs/git-branch#Documentation/git-branch.txt---sortltkeygt
             -- Sorting keys: https://git-scm.com/docs/git-for-each-ref#_options
             sort_branches = "-committerdate",
-            disable_builtin_notifications = false,
-            -- Allows a different telescope sorter. Defaults to 'fuzzy_with_index_bias'. The example
-            -- below will use the native fzf sorter instead.
-            telescope_sorter = function()
-                return require("telescope").extensions.fzf.native_fzf_sorter()
-            end,
-            use_magit_keybindings = false,
             -- Change the default way of opening neogit
             kind = "tab",
+            -- Disable line numbers and relative line numbers
+            disable_line_numbers = true,
             -- The time after which an output console is shown for slow running commands
             console_timeout = 2000,
             -- Automatically show console if a command takes more than console_timeout milliseconds
             auto_show_console = true,
-            -- Persist the values of switches/options within and across sessions
-            remember_settings = true,
-            -- Scope persisted settings on a per-project basis
-            use_per_project_settings = true,
-            -- Array-like table of settings to never persist. Uses format "Filetype--cli-value"
-            --   ie: `{ "NeogitCommitPopup--author", "NeogitCommitPopup--no-verify" }`
-            ignored_settings = {},
-            -- Change the default way of opening the commit popup
-            commit_popup = {
-                kind = "split",
+            status = {
+                recent_commit_count = 10,
             },
-            -- Change the default way of opening the preview buffer
+            commit_editor = {
+                kind = "auto",
+            },
+            commit_select_view = {
+                kind = "tab",
+            },
+            commit_view = {
+                kind = "vsplit",
+                verify_commit = os.execute("which gpg") == 0, -- Can be set to true or false, otherwise we try to find the binary
+            },
+            log_view = {
+                kind = "tab",
+            },
+            rebase_editor = {
+                kind = "auto",
+            },
+            reflog_view = {
+                kind = "tab",
+            },
+            merge_editor = {
+                kind = "auto",
+            },
+            tag_editor = {
+                kind = "auto",
+            },
             preview_buffer = {
                 kind = "split",
             },
-            -- Change the default way of opening popups
             popup = {
                 kind = "split",
             },
-            -- customize displayed signs
             signs = {
                 -- { CLOSED, OPENED }
                 section = { "", "" },
                 item = { "", "" },
                 hunk = { "", "" },
             },
-            -- Integrations are auto-detected, and enabled if available, but can be disabled by setting to "false"
+            -- Each Integration is auto-detected through plugin presence, however, it can be disabled by setting to `false`
             integrations = {
                 telescope = true,
                 diffview = true,
             },
-            -- Setting any section to `false` will make the section not render at all
-            sections = {
-                -- Reverting/Cherry Picking
-                sequencer = {
-                    folded = false,
-                    hidden = false,
-                },
-                untracked = {
-                    folded = false,
-                    hidden = false,
-                },
-                unstaged = {
-                    folded = false,
-                    hidden = false,
-                },
-                staged = {
-                    folded = false,
-                    hidden = false,
-                },
-                stashes = {
-                    folded = true,
-                    hidden = false,
-                },
-                unpulled_upstream = {
-                    folded = true,
-                    hidden = false,
-                },
-                unmerged_upstream = {
-                    folded = false,
-                    hidden = false,
-                },
-                unpulled_pushRemote = {
-                    folded = true,
-                    hidden = false,
-                },
-                unmerged_pushRemote = {
-                    folded = false,
-                    hidden = false,
-                },
-                recent = {
-                    folded = true,
-                    hidden = false,
-                },
-                rebase = {
-                    folded = true,
-                    hidden = false,
-                },
-            },
         }
     end
 }
-
