@@ -60,10 +60,11 @@ return {
                     surface2 = "#6E6C7E",
                     surface1 = "#575268",
                     surface0 = "#302D41",
-                    -- mantle = "#1A1826",
                     mantle = "#1F1D2E",
                     crust = "#161320", -- darker base
                     base = "#191724",
+                    subbase = "#12111B",
+                    subsubbase = "#0D0C13",
                 },
             },
             highlight_overrides = {
@@ -89,7 +90,28 @@ return {
                         OrgBulletsPlus = { fg = cp.flamingo, link = nil },
                         OrgBulletsStar = { fg = cp.flamingo, link = nil },
                         -- indent-blankline
-                        MiniIndentscopeSymbol = { fg = cp.mauve }
+                        MiniIndentscopeSymbol = { fg = cp.mauve },
+                        -- barbar.nvim
+                        BufferCurrent = { bg = cp.base, fg = cp.text },
+                        BufferCurrentIndex = { bg = cp.base, fg = cp.blue },
+                        BufferCurrentMod = { bg = cp.base, fg = cp.green },
+                        BufferCurrentSign = { bg = cp.base, fg = cp.lavender },
+                        BufferCurrentTarget = { bg = cp.base, fg = cp.red },
+                        --
+                        ---@diagnostic disable: undefined-field
+                        BufferInactive = { bg = cp.subbase, fg = cp.surface1 },
+                        BufferInactiveIndex = { bg = cp.subbase, fg = cp.blue },
+                        BufferInactiveMod = { bg = cp.subbase, fg = cp.green },
+                        BufferInactiveSign = { bg = cp.subbase, fg = cp.subbase }, BufferInactiveTarget = { bg = cp.subbase, fg = cp.red },
+                        --
+                        BufferVisible = { bg = cp.subbase, fg = cp.text },
+                        BufferVisibleIndex = { bg = cp.subbase, fg = cp.blue },
+                        BufferVisibleMod = { bg = cp.subbase, fg = cp.green },
+                        BufferVisibleSign = { bg = cp.subbase, fg = cp.subbase },
+                        BufferVisibleTarget = { bg = cp.subbase, fg = cp.red },
+                        --
+                        BufferTabpageFill = { bg = cp.subsubbase }
+                        ---@diagnostic enable: undefined-field
                     }
                 end,
             },

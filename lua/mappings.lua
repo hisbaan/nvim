@@ -23,12 +23,6 @@ map("v", ">", ">gv", opts)
 -- paste over currently selected text without yanking it
 map("v", "p", "\"_dP", opts)
 
--- Tab switch buffer
-map("n", "<S-l>", "<Cmd>bnext<CR>", opts)
-map("n", "<S-h>", "<Cmd>bprevious<CR>", opts)
-map("t", "<C-S-l>", "<Cmd>bnext<CR>", opts)
-map("t", "<C-S-h>", "<Cmd>bprevious<CR>", opts)
-
 -- Cancel search highlighting with ESC
 map("n", "<ESC>", ":nohlsearch<Bar>:echo<CR>", opts)
 
