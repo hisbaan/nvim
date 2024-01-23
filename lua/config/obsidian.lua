@@ -68,7 +68,7 @@ return {
 
         daily_notes = {
             -- Optional, if you keep daily notes in a separate directory.
-            -- folder = "notes/dailies",
+            folder = "notes/dailies",
             -- Optional, if you want to change the date format for the ID of daily notes.
             date_format = "%Y-%m-%d",
             -- Optional, if you want to change the date format of the default alias of daily notes.
