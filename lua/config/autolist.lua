@@ -45,11 +45,11 @@ return {
                 tex = { list_patterns.latex_item },
                 plaintex = { list_patterns.latex_item },
             },
-            checkbox = {
-                left = "%[", -- the left checkbox delimiter (you could change to "%(" for brackets)
-                right = "%]", -- the right checkbox delim (same customisation as above)
-                fill = "x", -- if you do the above two customisations, your checkbox could be (x) instead of [x]
-            },
+            -- checkbox = {
+            --     left = "%[", -- the left checkbox delimiter (you could change to "%(" for brackets)
+            --     right = "%]", -- the right checkbox delim (same customisation as above)
+            --     fill = "x", -- if you do the above two customisations, your checkbox could be (x) instead of [x]
+            -- },
         })
 
         -- vim.keymap.set("i", "<tab>", "<cmd>AutolistTab<cr>")
@@ -64,10 +64,6 @@ return {
         -- cycle list types with dot-repeat
         vim.keymap.set("n", "<leader>cn", require("autolist").cycle_next_dr, { expr = true })
         vim.keymap.set("n", "<leader>cp", require("autolist").cycle_prev_dr, { expr = true })
-
-        -- if you don't want dot-repeat
-        -- vim.keymap.set("n", "<leader>cn", "<cmd>AutolistCycleNext<cr>")
-        -- vim.keymap.set("n", "<leader>cp", "<cmd>AutolistCycleNext<cr>")
 
         -- functions to recalculate list on edit
         vim.keymap.set("n", ">>", ">><cmd>AutolistRecalculate<cr>")
