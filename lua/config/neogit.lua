@@ -76,29 +76,29 @@ return {
                 recent_commit_count = 10,
             },
             commit_editor = {
-                kind = "auto",
+                kind = "split",
             },
             commit_select_view = {
                 kind = "tab",
             },
             commit_view = {
-                kind = "vsplit",
+                kind = "split",
                 verify_commit = os.execute("which gpg") == 0, -- Can be set to true or false, otherwise we try to find the binary
             },
             log_view = {
                 kind = "tab",
             },
             rebase_editor = {
-                kind = "auto",
+                kind = "split",
             },
             reflog_view = {
                 kind = "tab",
             },
             merge_editor = {
-                kind = "auto",
+                kind = "split",
             },
             tag_editor = {
-                kind = "auto",
+                kind = "split",
             },
             preview_buffer = {
                 kind = "split",

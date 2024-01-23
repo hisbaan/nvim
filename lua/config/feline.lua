@@ -1,5 +1,5 @@
 return {
-    'feline-nvim/feline.nvim',
+    'freddiehaddad/feline.nvim',
     config = function()
         vim.opt.termguicolors = true
         require("feline").setup {
