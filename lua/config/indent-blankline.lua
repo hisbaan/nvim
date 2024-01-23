@@ -21,6 +21,7 @@ return {
                     "gitcommit",
                     "TelescopePrompt",
                     "TelescopeResults",
+                    "dashboard",
                     "",
                 }
             }
