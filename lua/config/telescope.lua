@@ -4,10 +4,10 @@ return {
     'nvim-telescope/telescope.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
     keys = {
-        { '<Leader><Space>', '<Cmd>Telescope find_files<CR>', opts, desc = "Find Files" },
-        { '<Leader>b', '<Cmd>Telescope buffers<CR>', opts, desc = "Pick Buffers" },
-        { '<Leader>tg', '<Cmd>Telescope live_grep<CR>', opts, desc = "Live Grep" },
-        { '<Leader>.', "<Cmd>lua require 'telescope'.extensions.file_browser.file_browser()<CR>", opts, desc = "File Browser" },
+        { '<Leader><Space>', '<Cmd>Telescope find_files<CR>', opts, desc = "Find files" },
+        { '<Leader>bs', '<Cmd>Telescope buffers<CR>', opts, desc = "Search Buffers" },
+        { '<Leader>tg', '<Cmd>Telescope live_grep<CR>', opts, desc = "Live grep" },
+        { '<Leader>.', "<Cmd>lua require 'telescope'.extensions.file_browser.file_browser()<CR>", opts, desc = "File browser" },
     },
     config = function()
         local actions = require("telescope.actions")
