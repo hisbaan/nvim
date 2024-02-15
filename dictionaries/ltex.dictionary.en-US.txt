@@ -9,3 +9,8 @@ metta
 anicca
 favourable
 dukkha
+OpenMRS
+OpenMRS
+nvim
+Neovim
+tokio

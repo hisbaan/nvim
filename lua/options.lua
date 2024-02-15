@@ -36,6 +36,9 @@ opt.wildignore = [[
 */tmp/*,*.so,*.swp,*.zip,**/node_modules/**,**/target/**,**.terraform/**"
 ]]
 
+-- Spelling
+opt.spelllang = 'en_ca'
+
 -- Tabs & Indentation
 opt.tabstop = 4
 opt.shiftwidth = 4
