@@ -3,7 +3,6 @@ return {
     ft = {
         "markdown",
         "text",
-        "tex",
         "plaintex",
     },
     config = function()
@@ -12,7 +11,6 @@ return {
             digit = "%d+[.)]", -- 1. 2. 3. ...
             ascii = "%a[.)]", -- a) b) c) ...
             roman = "%u*[.)]", -- I. II. III. ...
-            latex_item = "\\item",
         }
 
         require("autolist").setup({
@@ -42,7 +40,6 @@ return {
                     list_patterns.ascii,
                     list_patterns.roman,
                 },
-                tex = { list_patterns.latex_item },
                 plaintex = { list_patterns.latex_item },
             },
             -- checkbox = {
