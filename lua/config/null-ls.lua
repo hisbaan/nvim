@@ -1,11 +1,10 @@
 return {
-    'jose-elias-alvarez/null-ls.nvim',
+    'nvimtools/none-ls.nvim',
     config = function()
+        local null_ls = require("null-ls")
         require("null-ls").setup({
             sources = {
-                -- require("null-ls").builtins.formatting.stylua,
-                -- require("null-ls").builtins.diagnostics.eslint,
-                -- require("null-ls").builtins.completion.spell,
+                null_ls.builtins.formatting.yamlfmt,
             },
         })
     end

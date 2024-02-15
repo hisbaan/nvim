@@ -210,6 +210,12 @@ lspconfig.rust_analyzer.setup({
     handlers = handlers,
 })
 
+lspconfig.yamlls.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    handlers = handlers,
+})
+
 -- lspconfig.sqlls.setup({
 --     on_attach = on_attach,
 --     capabilities = capabilities,
