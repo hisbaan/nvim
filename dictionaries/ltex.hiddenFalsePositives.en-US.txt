@@ -1,2 +1,3 @@
 {"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\QTitle .\\E$"}
 {"rule":"ALSO_OTHER","sentence":"^\\QMindfulness is usually cultivated via meditative practice, but there are also other methods used both in and out of the Buddhist framework.\\E$"}
+{"rule":"DOUBLE_PUNCTUATION","sentence":"^\\QPerformed code review for 10+ contributors..\\E$"}
