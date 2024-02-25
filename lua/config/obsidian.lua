@@ -1,6 +1,7 @@
 return {
+
     "epwalsh/obsidian.nvim",
-    version = "*",  -- recommended, use latest release instead of latest commit
+    version = "*", -- recommended, use latest release instead of latest commit
     lazy = true,
     event = {
         -- "BufReadPre " .. vim.fn.expand "~" .. "/Documents/obsidian/**.md",
@@ -22,11 +23,12 @@ return {
                 path = "~/Documents/obsidian/",
             },
         },
-        detect_cwd = false,
         completion = {
             nvim_cmp = true,
             min_chars = 2,
             new_notes_location = "current_dir",
+            -- wiki or markdown
+            preferred_link_style = "wiki",
             -- Control how wiki links are completed with these (mutually exclusive) options:
             --
             -- 1. Whether to add the note ID during completion.
@@ -131,12 +133,20 @@ return {
             wrap = true,
         },
 
+        -- Optional, customize the tags interface.
+        tags = {
+            -- The default height of the tags location list.
+            height = 10,
+            -- Whether or not to wrap lines.
+            wrap = true,
+        },
+
         -- Optional, by default when you use `:ObsidianFollowLink` on a link to an external
         -- URL it will be ignored but you can customize this behavior here.
         follow_url_func = function(url)
             -- Open the URL in the default web browser.
             -- vim.fn.jobstart({"open", url})  -- Mac OS
-            vim.fn.jobstart({"xdg-open", url})  -- linux
+            vim.fn.jobstart({ "xdg-open", url }) -- linux
         end,
 
         -- Optional, set to true if you use the Obsidian Advanced URI plugin.
@@ -150,7 +160,13 @@ return {
         -- telescope.nvim, fzf-lua, or fzf.vim (in that order), and use the
         -- first one they find. You can set this option to tell obsidian.nvim to always use this
         -- finder.
-        finder = "telescope.nvim",
+        picker = {
+            name = "telescope.nvim",
+            mappings = {
+                new = "<C-x>",
+                insert_link = "<C-l>",
+            }
+        },
 
         -- Optional, sort search results by "path", "modified", "accessed", or "created".
         -- The recommend value is "modified" and `true` for `sort_reversed`, which means, for example,
@@ -166,8 +182,8 @@ return {
 
         -- Optional, configure additional syntax highlighting / extmarks.
         ui = {
-            enable = false,  -- set to false to disable all additional syntax features
-            update_debounce = 200,  -- update delay after a text change (in milliseconds)
+            enable = false,        -- set to false to disable all additional syntax features
+            update_debounce = 200, -- update delay after a text change (in milliseconds)
             -- Define how various check-boxes are displayed
             checkboxes = {
                 [" "] = { char = "󰄱", hl_group = "ObsidianTodo" },
@@ -200,7 +216,7 @@ return {
             -- The default folder to place images in via `:ObsidianPasteImg`.
             -- If this is a relative path it will be interpreted as relative to the vault root.
             -- You can always override this per image by passing a full path to the command instead of just a filename.
-            img_folder = "assets/imgs",  -- This is the default
+            img_folder = "assets/imgs", -- This is the default
             -- A function that determines the text to insert in the note when pasting an image.
             -- It takes two arguments, the `obsidian.Client` and a plenary `Path` to the image file.
             -- This is the default implementation.
