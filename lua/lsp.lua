@@ -216,6 +216,12 @@ lspconfig.yamlls.setup({
     handlers = handlers,
 })
 
+lspconfig.taplo.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    handlers = handlers,
+})
+
 -- lspconfig.sqlls.setup({
 --     on_attach = on_attach,
 --     capabilities = capabilities,

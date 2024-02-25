@@ -30,10 +30,10 @@ return {
                 "rust_analyzer",
                 "sqlls",
                 "tailwindcss",
+                "taplo",
                 "tsserver",
                 "volar",
                 "yamlls",
-                "yamlfmt",
             }
         }
     end

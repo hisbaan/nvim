@@ -17,6 +17,7 @@ return {
         -- Excluded filetype list. Overrides `include` list.
         exclude = {
           "",
+          "toggleterm",
           "term",
           "dashboard",
           "alpha",
