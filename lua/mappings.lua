@@ -58,6 +58,11 @@ noremap! <C-h> <C-w>
 -- Save on leader w
 map('n', '<Leader>w', "<Cmd>w<CR>", opts)
 
+-- quickfix bindinds
+map("n", "<Leader>qn", "<Cmd>cnext<CR>zz", opts)
+map("n", "<Leader>qp", "<Cmd>cprev<CR>zz", opts)
+map("n", "<Leader>qf", "<Cmd>cnfile<CR>zz", opts)
+
 -- Terminal
 map('n', '<Leader>tt', '<Cmd>terminal<CR>A', opts)
 map('n', '<Leader>te', '<Cmd>!wezterm start --cwd "$PWD" --always-new-process & disown<CR><CR>', opts)
