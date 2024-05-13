@@ -1,8 +1,6 @@
 local lua_fn = require('map_utils').lua_fn
 
 vim.o.foldlevel = 99
-vim.opt.tabstop = 2
-vim.opt_local.shiftwidth = 2
 vim.b.miniindentscope_disable = true
 
 -- Add <C-CR> insert mode binding to create new item

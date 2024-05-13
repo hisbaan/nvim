@@ -19,7 +19,6 @@ return {
                 "cssls",
                 "emmet_ls",
                 "eslint",
-                "hls",
                 "html",
                 "intelephense",
                 "jdtls",
