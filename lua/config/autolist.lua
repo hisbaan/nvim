@@ -16,8 +16,8 @@ return {
         require("autolist").setup({
             enabled = true,
             colon = { -- if a line ends in a colon
-                indent = true, -- if in list and line ends in `:` then create list
-                indent_raw = true, -- above, but doesn't need to be in a list to work
+                indent = false, -- if in list and line ends in `:` then create list
+                indent_raw = false, -- above, but doesn't need to be in a list to work
                 preferred = "-", -- what the new list starts with (can be `1.` etc)
             },
             cycle = { -- Cycles the list type in order
@@ -63,9 +63,9 @@ return {
         vim.keymap.set("n", "<leader>cp", require("autolist").cycle_prev_dr, { expr = true })
 
         -- functions to recalculate list on edit
-        vim.keymap.set("n", ">>", ">><cmd>AutolistRecalculate<cr>")
-        vim.keymap.set("n", "<<", "<<<cmd>AutolistRecalculate<cr>")
-        vim.keymap.set("n", "dd", "dd<cmd>AutolistRecalculate<cr>")
-        vim.keymap.set("v", "d", "d<cmd>AutolistRecalculate<cr>")
+        -- vim.keymap.set("n", ">>", ">><cmd>AutolistRecalculate<cr>")
+        -- vim.keymap.set("n", "<<", "<<<cmd>AutolistRecalculate<cr>")
+        -- vim.keymap.set("n", "dd", "dd<cmd>AutolistRecalculate<cr>")
+        -- vim.keymap.set("v", "d", "d<cmd>AutolistRecalculate<cr>")
     end,
 }

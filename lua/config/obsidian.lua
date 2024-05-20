@@ -23,26 +23,20 @@ return {
                 path = "~/Documents/obsidian/",
             },
         },
+        wiki_link_func = function(opts)
+            if opts.id == nil then
+                return string.format("[[%s]]", opts.label)
+            elseif opts.label ~= opts.id then
+                return string.format("[[%s|%s]]", opts.id, opts.label)
+            else
+                return string.format("[[%s]]", opts.id)
+            end
+        end,
+        preferred_link_style = "wiki",
+        new_notes_location = "current_dir",
         completion = {
             nvim_cmp = true,
             min_chars = 2,
-            new_notes_location = "current_dir",
-            -- wiki or markdown
-            preferred_link_style = "wiki",
-            -- Control how wiki links are completed with these (mutually exclusive) options:
-            --
-            -- 1. Whether to add the note ID during completion.
-            -- E.g. "[[Foo" completes to "[[foo|Foo]]" assuming "foo" is the ID of the note.
-            -- Mutually exclusive with 'prepend_note_path' and 'use_path_only'.
-            prepend_note_id = true,
-            -- 2. Whether to add the note path during completion.
-            -- E.g. "[[Foo" completes to "[[notes/foo|Foo]]" assuming "notes/foo.md" is the path of the note.
-            -- Mutually exclusive with 'prepend_note_id' and 'use_path_only'.
-            prepend_note_path = false,
-            -- 3. Whether to only use paths during completion.
-            -- E.g. "[[Foo" completes to "[[notes/foo]]" assuming "notes/foo.md" is the path of the note.
-            -- Mutually exclusive with 'prepend_note_id' and 'prepend_note_path'.
-            use_path_only = false,
         },
         mappings = {
             -- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
@@ -125,25 +119,11 @@ return {
         --     substitutions = {},
         -- },
 
-        -- Optional, customize the backlinks interface.
-        backlinks = {
-            -- The default height of the backlinks pane.
-            height = 10,
-            -- Whether or not to wrap lines.
-            wrap = true,
-        },
-
-        -- Optional, customize the tags interface.
-        tags = {
-            -- The default height of the tags location list.
-            height = 10,
-            -- Whether or not to wrap lines.
-            wrap = true,
-        },
-
         -- Optional, by default when you use `:ObsidianFollowLink` on a link to an external
         -- URL it will be ignored but you can customize this behavior here.
         follow_url_func = function(url)
+            -- TODO if file is PDF, open with zathura instead of browser
+            --
             -- Open the URL in the default web browser.
             -- vim.fn.jobstart({"open", url})  -- Mac OS
             vim.fn.jobstart({ "xdg-open", url }) -- linux
