@@ -8,10 +8,9 @@ return {
     },
     config = function()
         require('jot').setup({
-            search_dir = "~/Documents/org/",
-            search_depth = 2,
+            search_dir = "~/Documents/obsidian/",
+            search_depth = 5,
             hide_search_dir = true,
-            post_open_hook = function() vim.cmd("normal zx") end,
         })
     end
 }
