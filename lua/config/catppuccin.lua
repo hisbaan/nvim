@@ -70,6 +70,8 @@ return {
             highlight_overrides = {
                 mocha = function(cp)
                     return {
+                        Comment = { fg = cp.overlay0 },
+                        ["@comment"] = { fg = cp.overlay0 },
                         -- Float
                         FloatBorder = { fg = cp.overlay0 },
                         NormalFloat = { bg = cp.base },
