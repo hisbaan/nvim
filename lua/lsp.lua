@@ -37,7 +37,6 @@ capabilities.textDocument.foldingRange = {
     lineFoldingOnly = true,
 }
 
-require('neodev').setup({})
 lspconfig.lua_ls.setup({
     on_attach = on_attach,
     capabilities = capabilities,
