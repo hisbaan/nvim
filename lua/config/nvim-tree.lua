@@ -90,7 +90,7 @@ return {
             },
             git = {
                 enable = true,
-                ignore = true,
+                ignore = false,
                 timeout = 400,
                 show_on_dirs = true,
                 show_on_open_dirs = true,

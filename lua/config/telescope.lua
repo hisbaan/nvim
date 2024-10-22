@@ -31,7 +31,7 @@ return {
                         -- Close on first esc instead of gonig to normal mode
                         ["<esc>"] = actions.close,
                         ["<A-q>"] = actions.send_selected_to_qflist,
-                        ["<C-q>"] = actions.send_to_qflist,
+                        ["<C-c>"] = actions.smart_send_to_qflist,
                         ["<s-tab>"] = actions.toggle_selection
                             + actions.move_selection_next,
                         ["<tab>"] = actions.toggle_selection
@@ -47,7 +47,7 @@ return {
                         ["<tab>"] = actions.toggle_selection
                             + actions.move_selection_previous,
                         ["<A-q>"] = actions.send_selected_to_qflist,
-                        ["<C-q>"] = actions.send_to_qflist,
+                        ["<C-c>"] = actions.send_to_qflist,
                         ["<cr>"] = custom_actions.multi_selection_open,
                         ["<c-v>"] = custom_actions.multi_selection_open_vsplit,
                         ["<c-s>"] = custom_actions.multi_selection_open_split,
