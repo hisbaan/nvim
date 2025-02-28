@@ -123,10 +123,9 @@ return {
         -- URL it will be ignored but you can customize this behavior here.
         follow_url_func = function(url)
             -- TODO if file is PDF, open with zathura instead of browser
-            --
             -- Open the URL in the default web browser.
-            -- vim.fn.jobstart({"open", url})  -- Mac OS
-            vim.fn.jobstart({ "xdg-open", url }) -- linux
+            local runner = (vim.fn.has('macunix') and "open" or "xdg-open")
+            vim.fn.jobstart({runner, url})
         end,
 
         -- Optional, set to true if you use the Obsidian Advanced URI plugin.
