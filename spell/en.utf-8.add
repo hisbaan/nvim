@@ -51,3 +51,6 @@ rebase
 schemas
 dev
 architected
+postgres
+versioning
+versioned
