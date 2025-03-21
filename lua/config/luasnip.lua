@@ -1,5 +1,6 @@
 return {
 	'L3MON4D3/LuaSnip',
+	dependencies = { 'rafamadriz/friendly-snippets' },
 	config = function()
 		vim.cmd([[
 " press <Tab> to expand or jump in a snippet. These can also be mapped separately

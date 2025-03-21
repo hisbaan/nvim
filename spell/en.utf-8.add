@@ -54,3 +54,7 @@ architected
 postgres
 versioning
 versioned
+sharding
+url
+standup
+config
