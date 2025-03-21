@@ -2,7 +2,7 @@ return {
     'williamboman/mason.nvim',
     dependencies = { 'williamboman/mason-lspconfig.nvim' },
     config = function()
-        require("mason").setup {
+        require("mason").setup({
             ui = {
                 border = "none", -- none, rounded, single, double, etc.
                 icons = {
@@ -11,7 +11,7 @@ return {
                     package_uninstalled = "✗"
                 }
             },
-        }
+        })
         require("mason-lspconfig").setup {
             ensure_installed = {
                 "bashls",
@@ -33,6 +33,7 @@ return {
                 "ts_ls",
                 "volar",
                 "yamlls",
+                "zls",
             }
         }
     end

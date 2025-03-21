@@ -165,6 +165,12 @@ lspconfig.eslint.setup({
     on_attach = on_attach,
     capabilities = capabilities,
     handlers = handlers,
+    settings = {
+        workingDirectories = { mode = 'auto' },
+        experimental = {
+            useFlatConfig = true,
+        },
+    }
 })
 
 lspconfig.hls.setup({
@@ -226,5 +232,11 @@ lspconfig.taplo.setup({
 --     capabilities = capabilities,
 --     handlers = handlers,
 -- })
+
+lspconfig.zls.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    handlers = handlers,
+})
 
 vim.o.signcolumn = "yes:1"
