@@ -7,7 +7,7 @@ return {
             relculright = true,
             bt_ignore = { "nofile" },
             clickhandlers = {
-                                        -- builtin click handlers
+                -- builtin click handlers
                 Lnum                   = false, -- builtin.lnum_click,
                 FoldClose              = false, -- builtin.foldclose_click,
                 FoldOpen               = false, -- builtin.foldopen_click,

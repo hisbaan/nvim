@@ -2,6 +2,7 @@ local opts = require('opts')
 
 return {
     'nvim-telescope/telescope.nvim',
+    enabled = false,
     dependencies = { 'nvim-lua/plenary.nvim' },
     keys = {
         { '<Leader><Space>', '<Cmd>Telescope find_files<CR>', opts, desc = "Find files" },

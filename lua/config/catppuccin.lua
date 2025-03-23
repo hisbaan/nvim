@@ -91,14 +91,17 @@ return {
                         OrgBulletsDash = { fg = cp.flamingo, link = nil },
                         OrgBulletsPlus = { fg = cp.flamingo, link = nil },
                         OrgBulletsStar = { fg = cp.flamingo, link = nil },
-                        -- indent-blankline
-                        MiniIndentscopeSymbol = { fg = cp.mauve },
                         -- barbar.nvim
                         BufferCurrent = { bg = cp.base, fg = cp.text },
                         BufferCurrentIndex = { bg = cp.base, fg = cp.blue },
                         BufferCurrentMod = { bg = cp.base, fg = cp.green },
                         BufferCurrentSign = { bg = cp.base, fg = cp.lavender },
                         BufferCurrentTarget = { bg = cp.base, fg = cp.red },
+                        -- snacks.nvim
+                        SnacksIndentScope = { fg = cp.mauve },
+                        SnacksIndent = { fg = cp.surface0 },
+                        SnacksBackdrop = { bg = cp.base },
+                        SnacksBackdrop_000000 = { bg = cp.base },
                         --
                         ---@diagnostic disable: undefined-field
                         BufferInactive = { bg = cp.subbase, fg = cp.surface1 },
@@ -112,7 +115,7 @@ return {
                         BufferVisibleSign = { bg = cp.subbase, fg = cp.subbase },
                         BufferVisibleTarget = { bg = cp.subbase, fg = cp.red },
                         --
-                        BufferTabpageFill = { bg = cp.subsubbase }
+                        BufferTabpageFill = { bg = cp.subsubbase },
                         ---@diagnostic enable: undefined-field
                     }
                 end,
