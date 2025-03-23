@@ -14,7 +14,7 @@ return {
         -- Optional
         "nvim-telescope/telescope.nvim",
         "nvim-treesitter/nvim-treesitter",
-        'hrsh7th/nvim-cmp',
+        "saghen/blink.cmp",
     },
     opts = {
         workspaces = {
@@ -35,7 +35,7 @@ return {
         preferred_link_style = "wiki",
         new_notes_location = "current_dir",
         completion = {
-            nvim_cmp = true,
+            blink = true,
             min_chars = 2,
         },
         mappings = {
@@ -125,7 +125,7 @@ return {
             -- TODO if file is PDF, open with zathura instead of browser
             -- Open the URL in the default web browser.
             local runner = (vim.fn.has('macunix') and "open" or "xdg-open")
-            vim.fn.jobstart({runner, url})
+            vim.fn.jobstart({ runner, url })
         end,
 
         -- Optional, set to true if you use the Obsidian Advanced URI plugin.
