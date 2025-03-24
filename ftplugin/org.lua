@@ -1,7 +1,7 @@
 -- local lua_fn = require('map_utils').lua_fn
 
--- vim.o.foldlevel = 99
--- vim.b.miniindentscope_disable = true
+vim.o.foldlevel = 99
+vim.g.snacks_indent = false
 
 -- Add <C-CR> insert mode binding to create new item
 vim.api.nvim_set_keymap('i', '<C-CR>', '<C-o><C-CR>', { noremap = false, silent = true })
