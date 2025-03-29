@@ -115,7 +115,7 @@ return {
             -- Each Integration is auto-detected through plugin presence, however, it can be disabled by setting to `false`
             integrations = {
                 telescope = true,
-                diffview = true,
+                diffview = false,
             },
         }
     end

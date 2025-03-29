@@ -15,8 +15,8 @@ return {
     }
 
     local handlers = {
-      ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
-      ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border })
+      ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border, silent = true }),
+      ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border, silent = true })
     }
 
     ---@diagnostic disable-next-line: unused-local
@@ -174,10 +174,11 @@ return {
       capabilities = capabilities,
       handlers = handlers,
       settings = {
-        workingDirectories = { mode = 'auto' },
+        workingDirectory = { mode = 'auto' },
+        useFlatConfig = false,
         experimental = {
-          useFlatConfig = true,
-        },
+          useFlatConfig = false,
+        }
       }
     })
 
@@ -213,8 +214,7 @@ return {
         tailwindCSS = {
           experimental = {
             classRegex = {
-              { "cva\\(((?:[^()]|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
-              { "cx\\(((?:[^()]|\\([^()]*\\))*)\\)",  "(?:'|\"|`)([^']*)(?:'|\"|`)" }
+              { "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
             },
           },
         },
