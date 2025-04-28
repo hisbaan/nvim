@@ -2,6 +2,9 @@ return {
 	'L3MON4D3/LuaSnip',
 	dependencies = { 'rafamadriz/friendly-snippets' },
 	config = function()
+		-- TODO
+		-- redo these as lua keybinds
+		-- move them to keys prop
 		vim.cmd([[
 " press <Tab> to expand or jump in a snippet. These can also be mapped separately
 " via <Plug>luasnip-expand-snippet and <Plug>luasnip-jump-next.
@@ -19,16 +22,16 @@ smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' 
 
 		-- Shorthands
 
-		local ls = require("luasnip")
+		local luasnip = require("luasnip")
 		-- some shorthands...
-		local s = ls.snippet
-		local sn = ls.snippet_node
-		local t = ls.text_node
-		local i = ls.insert_node
-		local f = ls.function_node
-		local c = ls.choice_node
-		local d = ls.dynamic_node
-		local r = ls.restore_node
+		local s = luasnip.snippet
+		local sn = luasnip.snippet_node
+		local t = luasnip.text_node
+		local i = luasnip.insert_node
+		local f = luasnip.function_node
+		local c = luasnip.choice_node
+		local d = luasnip.dynamic_node
+		local r = luasnip.restore_node
 		local l = require("luasnip.extras").lambda
 		local rep = require("luasnip.extras").rep
 		local p = require("luasnip.extras").partial
@@ -40,9 +43,9 @@ smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' 
 		local types = require("luasnip.util.types")
 		local conds = require("luasnip.extras.expand_conditions")
 
-		require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/snippets/" })
+		require("luasnip.loaders.from_lua").load({ paths = { "~/.config/nvim/snippets/" } })
 
-		ls.config.set_config({
+		luasnip.config.set_config({
 			history = false,
 			update_events = "TextChanged,TextChangedI",
 			delete_check_events = "TextChanged",
@@ -65,6 +68,21 @@ smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' 
 		--------------
 		-- Snippets --
 		--------------
+
+		-- uuidgen
+		local function uuid()
+			local id, _ = vim.fn.system('uuidgen'):gsub('\n', '')
+			return id
+		end
+		luasnip.add_snippets('global', {
+			s({
+				trig = 'uuid',
+				name = 'UUID',
+				dscr = 'Generate a unique UUID'
+			}, {
+				d(1, function() return sn(nil, i(1, uuid())) end)
+			})
+		})
 
 		-- complicated function for dynamicNode.
 		local function jdocsnip(args, _, old_state)
@@ -153,7 +171,7 @@ smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' 
 			return snip
 		end
 
-		ls.add_snippets("java", {
+		luasnip.add_snippets("java", {
 			-- Very long example for a java class.
 			s("fn", {
 				d(6, jdocsnip, { 2, 4, 5 }),
@@ -193,14 +211,15 @@ smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' 
 
 		function leave_snippet()
 			if
-				((vim.v.event.old_mode == 's' and vim.v.event.new_mode == 'n') or vim.v.event.old_mode == 'i')
-				and require('luasnip').session.current_nodes[vim.api.nvim_get_current_buf()]
-				and not require('luasnip').session.jump_active
+					((vim.v.event.old_mode == 's' and vim.v.event.new_mode == 'n') or vim.v.event.old_mode == 'i')
+					and require('luasnip').session.current_nodes[vim.api.nvim_get_current_buf()]
+					and not require('luasnip').session.jump_active
 			then
 				require('luasnip').unlink_current()
 			end
 		end
 
+		-- TODO redo this with nvim autocmd api
 		-- stop snippets when you leave to normal mode
 		vim.api.nvim_command([[
     autocmd ModeChanged * lua leave_snippet()
