@@ -14,6 +14,11 @@ return {
     fuzzy = { implementation = "prefer_rust_with_warning" },
 
     completion = {
+      accept = {
+        auto_brackets = {
+          enabled = false,
+        },
+      },
       keyword = {
         range = 'full'
       },

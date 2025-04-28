@@ -1,27 +1,23 @@
-local opt = vim.opt
-local wo = vim.wo
-local g = vim.g
-
-opt.linebreak = true
-opt.hidden = true
-opt.history = 5000
-opt.clipboard = "unnamedplus"
-opt.mouse = "a"
-opt.encoding = "utf-8"
-g.tex_flavor = "latex"
-opt.undofile = true
-opt.timeoutlen = 400 -- time to wait for a mapped sequence to complete (in milliseconds)
-opt.ttimeout = true
-opt.ttimeoutlen = 0  -- Time in milliseconds to wait for a key code sequence to complete
-opt.conceallevel = 0 -- so that ` is visible in markdown files
-opt.concealcursor = "nc"
-opt.virtualedit = "all"
+vim.o.linebreak = true
+vim.o.hidden = true
+vim.o.history = 5000
+vim.o.clipboard = "unnamedplus"
+vim.o.mouse = "a"
+vim.o.encoding = "utf-8"
+vim.g.tex_flavor = "latex"
+vim.o.undofile = true
+vim.o.timeoutlen = 400 -- time to wait for a mapped sequence to complete (in milliseconds)
+vim.o.ttimeout = true
+vim.o.ttimeoutlen = 0  -- Time in milliseconds to wait for a key code sequence to complete
+vim.o.conceallevel = vim.bo.readonly or vim.bo.buftype == 'nofile' and 2 or 0
+vim.o.concealcursor = "nc"
+vim.o.virtualedit = "all"
 if vim.fn.executable("rg") then
-	opt.grepprg = "rg --vimgrep --no-heading --smart-case --"
+  vim.o.grepprg = "rg --vimgrep --no-heading --smart-case --"
 end
-opt.completeopt = { "menu", "menuone", "noselect", "noinsert" } -- A comma separated list of options for Insert mode completion
-opt.wildignorecase = true -- When set case is ignored when completing file names and directories
-opt.wildignore = [[
+vim.opt.completeopt = { "menu", "menuone", "noselect", "noinsert" } -- A comma separated list of options for Insert mode completion
+vim.o.wildignorecase = true                                       -- When set case is ignored when completing file names and directories
+vim.o.wildignore = [[
 .git,.hg,.svn
 *.aux,*.out,*.toc
 *.o,*.obj,*.exe,*.dll,*.manifest,*.rbc,*.class
@@ -36,34 +32,34 @@ opt.wildignore = [[
 ]]
 
 -- Spelling
-opt.spelllang = 'en_ca'
+vim.o.spelllang = 'en_ca'
 
 -- Tabs & Indentation
-opt.tabstop = 2
-opt.shiftwidth = 2
-opt.softtabstop = 2
-opt.textwidth = 0
-opt.joinspaces = false
-opt.expandtab = true   -- convert tabs to spaces
-opt.smartindent = true -- make indenting smarter again
-opt.breakindent = true -- indent wrapped lines
-opt.breakindentopt = "list:-1"
+vim.o.tabstop = 2
+vim.o.shiftwidth = 2
+vim.o.softtabstop = 2
+vim.o.textwidth = 0
+vim.o.joinspaces = false
+vim.o.expandtab = true   -- convert tabs to spaces
+vim.o.smartindent = true -- make indenting smarter again
+vim.o.breakindent = true -- indent wrapped lines
+vim.o.breakindentopt = "list:-1"
 
 -- Search
-opt.ignorecase = true
-opt.smartcase = true
-opt.incsearch = true
+vim.o.ignorecase = true
+vim.o.smartcase = true
+vim.o.incsearch = true
 
 -- Appearance
-opt.cursorline = true
-wo.rnu = true
-wo.number = true
-opt.scrolloff = 3
-opt.sidescrolloff = 5
-opt.termguicolors = true
-opt.cmdheight = 1     -- space for displaying messages/commands
-opt.showmode = false  -- we don't need to see things like -- INSERT -- anymore
-opt.splitbelow = true -- force all horizontal splits to go below current window
-opt.splitright = true -- force all vertical splits to go to the right of current window
-opt.hlsearch = true   -- highlight all matches on previous search pattern
-opt.lazyredraw = true -- do not redraw screen while running macros
+vim.o.cursorline = true
+vim.wo.rnu = true
+vim.wo.number = true
+vim.o.scrolloff = 3
+vim.o.sidescrolloff = 5
+vim.o.termguicolors = true
+vim.o.cmdheight = 1     -- space for displaying messages/commands
+vim.o.showmode = false  -- we don't need to see things like -- INSERT -- anymore
+vim.o.splitbelow = true -- force all horizontal splits to go below current window
+vim.o.splitright = true -- force all vertical splits to go to the right of current window
+vim.o.hlsearch = true   -- highlight all matches on previous search pattern
+vim.o.lazyredraw = true -- do not redraw screen while running macros

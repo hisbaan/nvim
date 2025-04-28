@@ -56,7 +56,7 @@ noremap! <C-h> <C-w>
 ]])
 
 -- Save on leader w
-map('n', '<Leader>w', "<Cmd>w<CR>", opts)
+vim.keymap.set('n', '<Leader>w', "<cmd>silent write<CR>", opts)
 
 -- quickfix bindinds
 map("n", "<Leader>qn", "<Cmd>cnext<CR>zz", opts)
