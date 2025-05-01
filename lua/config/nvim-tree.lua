@@ -1,18 +1,44 @@
-local opts = require('opts')
+local map_opts = require('opts')
 
 return {
     'nvim-tree/nvim-tree.lua',
     keys = {
-        { '<Leader>f', '<Cmd>NvimTreeToggle<CR>', opts, desc = "NvimTree" },
+        { '<leader>f', '<Cmd>NvimTreeToggle<CR>', map_opts, desc = "NvimTree" },
     },
     lazy = false,
-    config = function()
+    -- each of these are documented in `:help nvim-tree.OPTION_NAME`
+    -- nested options are documented by accessing them with `.` (eg: `:help nvim-tree.view.mappings.list`).
+    opts = function()
         vim.g.loaded_netrw = 1
         vim.g.loaded_netrwPlugin = 1
 
-        -- each of these are documented in `:help nvim-tree.OPTION_NAME`
-        -- nested options are documented by accessing them with `.` (eg: `:help nvim-tree.view.mappings.list`).
-        require("nvim-tree").setup {
+        local function on_attach(bufnr)
+            local api = require("nvim-tree.api")
+
+            local function nvim_tree_opts(desc)
+                return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+            end
+
+            -- default mappings
+            api.config.mappings.default_on_attach(bufnr)
+
+            -- override default delete mapping with trash
+            vim.keymap.set("n", "d", api.fs.trash, nvim_tree_opts("Trash"))
+        end
+
+        local function open_nvim_tree(data)
+            local is_a_directory = vim.fn.isdirectory(data.file) == 1
+
+            if is_a_directory then
+                vim.cmd.cd(data.file)
+                require("nvim-tree.api").tree.open()
+                return
+            end
+        end
+        vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
+
+        return {
+            on_attach = on_attach,
             auto_reload_on_write = true,
             create_in_closed_folder = false,
             disable_netrw = true,
@@ -21,8 +47,8 @@ return {
             hijack_unnamed_buffer_when_opening = false,
             open_on_tab = false,
             sort_by = "name",
-            update_cwd = true,
             reload_on_bufenter = true,
+            update_cwd = false,
             respect_buf_cwd = true,
             hijack_directories = {
                 enable = true,
@@ -30,7 +56,7 @@ return {
             },
             update_focused_file = {
                 enable = false,
-                update_cwd = true,
+                update_cwd = false,
                 ignore_list = { ".git", "node_modules", ".cache" }
             },
             diagnostics = {
@@ -128,16 +154,5 @@ return {
                 },
             },
         }
-
-        local function open_nvim_tree(data)
-            local is_a_directory = vim.fn.isdirectory(data.file) == 1
-
-            if is_a_directory then
-                vim.cmd.cd(data.file)
-                require("nvim-tree.api").tree.open()
-                return
-            end
-        end
-        vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
     end
 }
