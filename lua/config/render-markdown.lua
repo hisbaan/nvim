@@ -7,8 +7,5 @@ return {
   },
   opts = {
     file_types = { "Avante" },
-    sign = {
-      enabled = false,
-    },
   }
 }

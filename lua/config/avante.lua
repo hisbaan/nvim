@@ -29,6 +29,7 @@ return {
         timeout = 30000, -- ms
         temperature = 0,
         max_tokens = 16384,
+        disable_tools = true,
       },
       gemini_flash = {
         -- see https://ai.google.dev/gemini-api/docs/models/gemini
@@ -39,13 +40,24 @@ return {
         timeout = 30000, -- ms
         temperature = 0,
         max_tokens = 16384,
+        disable_tools = true,
       },
     },
     hints = { enabled = false },
+    mode = "legacy",
     behaviour = {
+      auto_focus_sidebar = true,
       auto_suggestions = false, -- experimental
-      auto_set_keymaps = true,  -- TODO look into setting keymaps manually
+      auto_suggestions_respect_ignore = false,
+      auto_set_highlight_group = true,
+      auto_set_keymaps = true,
+      auto_apply_diff_after_generation = false,
+      jump_result_buffer_on_finish = false,
+      support_paste_from_clipboard = false,
+      minimize_diff = true,
       use_cwd_as_project_root = true,
+      enable_token_counting = true,
+    },
     mappings = {
       diff = {
         ours = "co",
