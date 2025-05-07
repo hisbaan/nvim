@@ -1,9 +1,15 @@
+local opts = require('opts');
+
 return {
   "yetone/avante.nvim",
   event = "VeryLazy",
   enabled = true,
   version = false,
   build = "make",
+  keys = {
+    { "<leader>a+", function() require("avante.extensions.nvim_tree").add_file() end,    opts, desc = "Select file in NvimTree", ft = "NvimTree" },
+    { "<leader>a-", function() require("avante.extensions.nvim_tree").remove_file() end, opts, desc = "Remove file in NvimTree", ft = "NvimTree" },
+  },
   dependencies = {
     "nvim-treesitter/nvim-treesitter",
     "nvim-lua/plenary.nvim",
@@ -40,6 +46,64 @@ return {
       auto_suggestions = false, -- experimental
       auto_set_keymaps = true,  -- TODO look into setting keymaps manually
       use_cwd_as_project_root = true,
+    mappings = {
+      diff = {
+        ours = "co",
+        theirs = "ct",
+        all_theirs = "ca",
+        both = "cb",
+        cursor = "cc",
+        next = "]x",
+        prev = "[x",
+      },
+      suggestion = {
+        accept = "<M-l>",
+        next = "<M-]>",
+        prev = "<M-[>",
+        dismiss = "<C-]>",
+      },
+      jump = {
+        next = "]]",
+        prev = "[[",
+      },
+      submit = {
+        normal = "<CR>",
+        insert = "<C-s>",
+      },
+      cancel = {
+        normal = { "<C-c>", "<Esc>", "q" },
+        insert = { "<C-c>" },
+      },
+      ask = "<leader>aa",
+      edit = "<leader>ae",
+      refresh = "<leader>ar",
+      focus = "<leader>af",
+      stop = "<leader>aS",
+      toggle = {
+        default = "<leader>at",
+        debug = "<leader>ad",
+        hint = "<leader>ah",
+        suggestion = "<leader>as",
+        repomap = "<leader>aR",
+      },
+      sidebar = {
+        apply_all = "A",
+        apply_cursor = "a",
+        retry_user_request = "r",
+        edit_user_request = "e",
+        switch_windows = "<Tab>",
+        reverse_switch_windows = "<S-Tab>",
+        remove_file = "d",
+        add_file = "@",
+        close = { "q" },
+        close_from_input = nil,
+      },
+      files = {
+        add_current = "<leader>ac",
+        add_all_buffers = "<leader>aB",
+      },
+      select_model = "<leader>am",
+      select_history = "<leader>ah",
     },
   },
 }

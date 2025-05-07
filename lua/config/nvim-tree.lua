@@ -1,9 +1,9 @@
-local map_opts = require('opts')
+local opts = require('opts')
 
 return {
     'nvim-tree/nvim-tree.lua',
     keys = {
-        { '<leader>f', '<Cmd>NvimTreeToggle<CR>', map_opts, desc = "NvimTree" },
+        { '<leader>f', '<Cmd>NvimTreeToggle<CR>', opts, desc = "NvimTree" },
     },
     lazy = false,
     -- each of these are documented in `:help nvim-tree.OPTION_NAME`
