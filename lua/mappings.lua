@@ -71,13 +71,3 @@ map('n', '<Leader>la', '<Cmd>lua vim.lsp.buf.code_action()<CR>', opts)
 map('n', '<Leader>lf', '<Cmd>lua vim.lsp.buf.format({async = true})<CR>', opts)
 map('n', '<Leader>lr', '<Cmd>lua vim.lsp.buf.rename()<CR>', opts)
 
-local virtual_lines_enabled = false
-map('n', '<leader>lt', '', {
-    callback = function()
-        virtual_lines_enabled = not virtual_lines_enabled
-        vim.diagnostic.config({
-            virtual_lines = virtual_lines_enabled,
-            virtual_text = not virtual_lines_enabled,
-        })
-    end,
-})
