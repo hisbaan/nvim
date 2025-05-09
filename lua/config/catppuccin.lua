@@ -102,6 +102,8 @@ return {
                         SnacksIndent = { fg = cp.surface0 },
                         SnacksBackdrop = { bg = cp.base },
                         SnacksBackdrop_000000 = { bg = cp.base },
+                        -- inlay hints
+                        LspInlayHint = { bg = "NONE", fg = cp.overlay0 },
                         --
                         ---@diagnostic disable: undefined-field
                         BufferInactive = { bg = cp.subbase, fg = cp.surface1 },

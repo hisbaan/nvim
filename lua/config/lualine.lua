@@ -151,25 +151,26 @@ return {
             color = { fg = sett.extras, bg = sett.bg },
             padding = { left = 0, right = 1 },
           },
-          {
-            "lsp_status",
-            ignore_lsp = { 'null-ls' },
-            icon = icons.lsp.server,
-            symbols = {
-              done = "",
-              separator = "",
-            },
-            color = { fg = sett.extras, bg = sett.bg },
-            padding = { left = 0, right = 1 },
-            -- {
-            --   function()
-            --     local clients = vim.lsp.get_clients({ bufnr = 0 })
-            --     if #clients == 0 then return "" end
-            --     return assets.lsp.server .. " " .. table.concat(vim.tbl_map(function(c) return c.name end, clients), "|")
-            --   end,
-            --   color = { fg = sett.extras, bg = sett.bkg },
-            -- },
-          }
+          -- TODO show only one then have a plus with the number of other servers (total - 1)
+          -- {
+          --   "lsp_status",
+          --   ignore_lsp = { 'null-ls' },
+          --   icon = icons.lsp.server,
+          --   symbols = {
+          --     done = "",
+          --     separator = " ",
+          --   },
+          --   color = { fg = sett.extras, bg = sett.bg },
+          --   padding = { left = 0, right = 1 },
+          --   -- {
+          --   --   function()
+          --   --     local clients = vim.lsp.get_clients({ bufnr = 0 })
+          --   --     if #clients == 0 then return "" end
+          --   --     return assets.lsp.server .. " " .. table.concat(vim.tbl_map(function(c) return c.name end, clients), "|")
+          --   --   end,
+          --   --   color = { fg = sett.extras, bg = sett.bkg },
+          --   -- },
+          -- }
         },
         lualine_y = {
           {

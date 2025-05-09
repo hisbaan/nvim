@@ -1,8 +1,14 @@
 return {
   'neovim/nvim-lspconfig',
-  dependencies = { 'saghen/blink.cmp' },
+  dependencies = {
+    'saghen/blink.cmp',
+    { 'mason-org/mason.nvim', opts = {} },
+    'mason-org/mason-lspconfig.nvim',
+    'WhoIsSethDaniel/mason-tool-installer.nvim',
+  },
   config = function()
-    local lspconfig = require("lspconfig")
+    vim.o.signcolumn = "yes:1"
+
     local border = {
       { "╭", "FloatBorder" },
       { "─", "FloatBorder" },
@@ -14,255 +20,258 @@ return {
       { "│", "FloatBorder" },
     }
 
-    local handlers = {
-      ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border, silent = true }),
-      ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border, silent = true })
-    }
+    vim.api.nvim_create_autocmd('LspAttach', {
+      group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
+      callback = function(event)
+        local map = function(mode, keys, func, desc)
+          vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = desc })
+        end
 
-    ---@diagnostic disable-next-line: unused-local
-    local function on_attach(client, bufnr)
-      local map = vim.api.nvim_set_keymap
-      local opts = { noremap = true, silent = true }
+        map('n', 'gd', vim.lsp.buf.definition, "go to definition");
+        map('n', 'gD', vim.lsp.buf.declaration, "go to declaration");
+        map('n', 'gr', vim.lsp.buf.references, "go to references");
+        map('n', 'gi', vim.lsp.buf.implementation, "go to implementation");
+        map('n', 'K', function() vim.lsp.buf.hover({ border = border }) end, "hover");
+        map('n', '<C-s>', function() vim.lsp.buf.signature_help({ border = border }) end, "signature help");
+        map('n', '<C-n>', function() vim.diagnostic.jump({ count = 1, float = true, border = border }) end,
+          "go to next diagnostic");
+        map('n', '<C-p>', function() vim.diagnostic.jump({ count = -1, float = true, border = border }) end,
+          "go to previous diagnositc");
 
-      map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts);
-      map('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts);
-      map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts);
-      map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts);
-      map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts);
-      map('n', '<C-s>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts);
-      map('n', '<C-n>', '<cmd>lua vim.diagnostic.goto_next({float = {border = "rounded"}})<CR>', opts);
-      map('n', '<C-p>', '<cmd>lua vim.diagnostic.goto_prev({float = {border = "rounded"}})<CR>', opts);
-    end
+        -- toggle inlay hints
+        local client = vim.lsp.get_client_by_id(event.data.client_id)
+        if client and client.supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
+          map(
+            'n',
+            '<leader>lth',
+            function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf })) end,
+            'toggle inlay hints'
+          )
+        end
 
-    local capabilities = {
+        -- toggle lsp virtual lines
+        local virtual_lines_enabled = false
+        map(
+          'n',
+          '<leader>ltl',
+          function()
+            virtual_lines_enabled = not virtual_lines_enabled
+            vim.diagnostic.config({
+              virtual_lines = virtual_lines_enabled,
+              virtual_text = not virtual_lines_enabled,
+            })
+          end,
+          'toggle lsp virtual lines'
+        )
+      end,
+    })
+
+    local diagnostics = { virtual_text = { prefix = "icons" } }
+
+    local capabilities = require('blink.cmp').get_lsp_capabilities({
+      workspace = {
+        didChangeWatchedFiles = {
+          dynamicRegistration = false,
+        },
+      },
       textDocument = {
         foldingRange = {
           dynamicRegistration = true,
           lineFoldingOnly = true,
         }
       }
+    })
+
+
+    local handlers = {
+      ["textDocument/hover"] =
+          vim.lsp.buf.hover({
+            border = border,
+            silent = true
+          }),
+      ["textDocument/signatureHelp"] =
+          vim.lsp.buf.signature_help({
+            border = border,
+            silent = true,
+          })
     }
 
-    capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
-
-    lspconfig.lua_ls.setup({
-      on_attach = on_attach,
-      capabilities = capabilities,
-      handlers = handlers,
-      settings = {
-        Lua = {
-          completion = {
-            callSnippet = "Replace"
-          },
-          diagnostics = {
-            globals = { "vim", "use" },
-          },
-          workspace = {
-            checkThirdParty = false,
-          },
-        },
-      },
-    })
-
-    lspconfig.jdtls.setup({
-      on_attach = on_attach,
-      capabilities = capabilities,
-      handlers = handlers,
-    })
-
-    lspconfig.intelephense.setup({
-      on_attach = on_attach,
-      capabilities = capabilities,
-      handlers = handlers,
-    })
-
-    lspconfig.volar.setup({
-      on_attach = on_attach,
-      capabilities = capabilities,
-      handlers = handlers,
-    })
-
-    -- FIX this ltex_extra call is not working properly
-    lspconfig.ltex.setup({
-      root_dir = lspconfig.util.root_pattern('*.tex'),
-      on_attach = function(client, bufnr)
-        on_attach(client, bufnr)
-        require("ltex_extra").setup {
-          load_langs = { "en-CA" },
-          init_check = true,
-          path = os.getenv("HOME") .. "/.config/nvim/dictionaries",
-          log_level = "none",
-        }
-      end,
-      capabilities = capabilities,
-      handlers = handlers,
-      filetypes = { 'latex', 'tex', 'bib' },
-      settings = {
-        ltex = {
-          enabled = { "latex", "tex", "bib" },
-          language = "en-CA",
-          dictionary = { ["en-CA"] = { "Hisbaan", "Noorani" } },
-          disabledRules = {
-            ["en-CA"] = {
-              "PROFANITY",
-              "EN_QUOTES",
-              "PASSIVE_VOICE",
-              "WHITESPACE_RULE",
-              "TOO_LONG_SENTENCE",
+    local servers = {
+      lua_ls = {
+        settings = {
+          Lua = {
+            completion = {
+              callSnippet = "Replace"
             },
-          },
-          additionalRules = {
-            enablePickyRules = true,
-            motherTongue = "en-CA",
-          },
-          latex = {
-            environments = {
-              verbatim = { "ignore" },
-              Verbatim = { "ignore" },
-              minted = { "ignore" },
-              texttt = { "ignore" },
-              forest = { "ignore" },
+            diagnostics = {
+              globals = { "vim", "use" },
             },
-          },
-          markdown = {
-            nodes = {
-              CodeBlock = { "ignore" },
-              FencedCodeBlock = { "ignore" },
-              AutoLink = { "dummy" },
-              Code = { "dummy" },
+            workspace = {
+              checkThirdParty = false,
             },
           },
         },
       },
-    })
-
-    lspconfig.bashls.setup({
-      on_attach = on_attach,
-      capabilities = capabilities,
-      handlers = handlers,
-    })
-
-    lspconfig.clangd.setup({
-      on_attach = on_attach,
-      capabilities = capabilities,
-      handlers = handlers,
-    })
-
-    lspconfig.cssls.setup({
-      on_attach = on_attach,
-      capabilities = capabilities,
-      handlers = handlers,
-    })
-
-    lspconfig.emmet_ls.setup({
-      on_attach = on_attach,
-      capabilities = capabilities,
-      handlers = handlers,
-      filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less', 'php', 'vue' },
-      init_options = {
-        html = {
-          options = {
-            -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
-            ["output.selfClosingStyle"] = "xhtml"
-          },
-        },
-      }
-    })
-
-    lspconfig.eslint.setup({
-      on_attach = on_attach,
-      capabilities = capabilities,
-      handlers = handlers,
-      settings = {
-        workingDirectory = { mode = 'auto' },
-        useFlatConfig = false,
-        experimental = {
-          useFlatConfig = false,
-        }
-      }
-    })
-
-    lspconfig.hls.setup({
-      on_attach = on_attach,
-      capabilities = capabilities,
-      handlers = handlers,
-    })
-
-    lspconfig.html.setup({
-      on_attach = on_attach,
-      capabilities = capabilities,
-      handlers = handlers,
-    })
-
-    lspconfig.jsonls.setup({
-      on_attach = on_attach,
-      capabilities = capabilities,
-      handlers = handlers,
-    })
-
-    lspconfig.nil_ls.setup({
-      on_attach = on_attach,
-      capabilities = capabilities,
-      handlers = handlers,
-    });
-
-    lspconfig.pyright.setup({
-      on_attach = on_attach,
-      capabilities = capabilities,
-      handlers = handlers,
-    })
-
-    lspconfig.tailwindcss.setup({
-      on_attach = on_attach,
-      capabilities = capabilities,
-      handlers = handlers,
-      settings = {
-        tailwindCSS = {
-          experimental = {
-            classRegex = {
-              { "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
+      jdtls = {},
+      intelephense = {},
+      volar = {},
+      -- FIX this ltex_extra call is not working properly
+      ltex = {
+        diagnostics = diagnostics,
+        root_dir = require('lspconfig.util').root_pattern('*.tex'),
+        ---@diagnostic disable-next-line: unused-local
+        on_attach = function(c, b)
+          require("ltex_extra").setup {
+            load_langs = { "en-CA" },
+            init_check = true,
+            path = os.getenv("HOME") .. "/.config/nvim/dictionaries",
+            log_level = "none",
+          }
+        end,
+        capabilities = capabilities,
+        handlers = handlers,
+        filetypes = { 'latex', 'tex', 'bib' },
+        settings = {
+          ltex = {
+            enabled = { "latex", "tex", "bib" },
+            language = "en-CA",
+            dictionary = { ["en-CA"] = { "Hisbaan", "Noorani" } },
+            disabledRules = {
+              ["en-CA"] = {
+                "PROFANITY",
+                "EN_QUOTES",
+                "PASSIVE_VOICE",
+                "WHITESPACE_RULE",
+                "TOO_LONG_SENTENCE",
+              },
+            },
+            additionalRules = {
+              enablePickyRules = true,
+              motherTongue = "en-CA",
+            },
+            latex = {
+              environments = {
+                verbatim = { "ignore" },
+                Verbatim = { "ignore" },
+                minted = { "ignore" },
+                texttt = { "ignore" },
+                forest = { "ignore" },
+              },
+            },
+            markdown = {
+              nodes = {
+                CodeBlock = { "ignore" },
+                FencedCodeBlock = { "ignore" },
+                AutoLink = { "dummy" },
+                Code = { "dummy" },
+              },
             },
           },
         },
-      }
+      },
+      bashls = {},
+      clangd = {},
+      cssls = {},
+      emmet_ls = {
+        filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less', 'php', 'vue' },
+        init_options = {
+          html = {
+            options = {
+              -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
+              ["output.selfClosingStyle"] = "xhtml"
+            },
+          },
+        }
+      },
+      -- TODO fix eslint issues with useFlatConfig
+      -- eslint = {
+      --   settings = {
+      --     workingDirectory = { mode = 'auto' },
+      --     useFlatConfig = false,
+      --     experimental = {
+      --       useFlatConfig = true,
+      --     }
+      --   }
+      -- },
+      hls = {},
+      html = {},
+      jsonls = {},
+      nil_ls = {},
+      pyright = {},
+      tailwindcss = {
+        -- TODO same as ts_ls
+        -- root_dir = require("lspconfig.util").root_pattern(".git"),
+        settings = {
+          tailwindCSS = {
+            classFunctions = { "cva", "cn", "cx" },
+          },
+        }
+      },
+      ts_ls = {
+        -- TODO figure out a root_dir setting that will work for projects with no git dir in root and also
+        -- monorepo projects without spawning one ts_ls per package/app in the monorepo
+        -- root_dir = require("lspconfig.util").root_pattern(".git"),
+        single_file_support = false,
+        settings = {
+          -- TODO see if typescriptreact, javascriptreact are needed
+          typescript = {
+            inlayHints = {
+              includeInlayParameterNameHints = "all",
+              includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayVariableTypeHints = false,
+              includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+              includeInlayPropertyDeclarationTypeHints = true,
+              includeInlayFunctionLikeReturnTypeHints = false,
+              includeInlayEnumMemberValueHints = true,
+            },
+          },
+          javascript = {
+            inlayHints = {
+              includeInlayParameterNameHints = "all",
+              includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayVariableTypeHints = false,
+              includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+              includeInlayPropertyDeclarationTypeHints = true,
+              includeInlayFunctionLikeReturnTypeHints = false,
+              includeInlayEnumMemberValueHints = true,
+            },
+          }
+        },
+      },
+      rust_analyzer = {},
+      yamlls = {},
+      taplo = {},
+      -- sqlls = {},
+      zls = {},
+    }
+
+    -- automatically install servers via mason-tool-installer
+    local ensure_installed = vim.tbl_keys(servers or {})
+    vim.list_extend(ensure_installed, {
+      'stylua',
+      'prettier',
+      'prettierd',
+      'yamlfmt',
     })
+    require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
-    lspconfig.ts_ls.setup({
-      on_attach = on_attach,
-      capabilities = capabilities,
-      handlers = handlers,
-    })
+    -- servers are enabled by mason-lspconfig
+    require('mason-lspconfig').setup {
+      ensure_installed = {},
+      automatic_installation = false,
+      automatic_enable = true,
+    }
 
-    lspconfig.rust_analyzer.setup({
-      on_attach = on_attach,
-      capabilities = capabilities,
-      handlers = handlers,
-    })
+    -- configure lsp servers
+    -- OPTIM see if this can be sped up
+    for server, config in pairs(servers) do
+      config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, config.capabilities or {})
+      config.handlers = vim.tbl_deep_extend('force', {}, handlers, config.handlers or {})
+      config.diagnostics = vim.tbl_deep_extend('force', {}, diagnostics, config.diagnostics or {})
 
-    lspconfig.yamlls.setup({
-      on_attach = on_attach,
-      capabilities = capabilities,
-      handlers = handlers,
-    })
-
-    lspconfig.taplo.setup({
-      on_attach = on_attach,
-      capabilities = capabilities,
-      handlers = handlers,
-    })
-
-    -- lspconfig.sqlls.setup({
-    --   on_attach = on_attach,
-    --   capabilities = capabilities,
-    --   handlers = handlers,
-    -- })
-
-    lspconfig.zls.setup({
-      on_attach = on_attach,
-      capabilities = capabilities,
-      handlers = handlers,
-    })
-
-    vim.o.signcolumn = "yes:1"
+      vim.lsp.config(server, config)
+    end
   end,
 }
