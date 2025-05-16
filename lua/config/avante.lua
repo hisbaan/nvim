@@ -25,7 +25,7 @@ return {
         __inherited_from = 'gemini',
         api_key_name = 'GEMINI_API_KEY',
         endpoint = "https://generativelanguage.googleapis.com/v1beta/models",
-        model = "gemini-2.5-pro-exp-03-25",
+        model = "gemini-2.5-pro-preview-05-06",
         timeout = 30000, -- ms
         temperature = 0,
         max_tokens = 16384,
@@ -41,6 +41,12 @@ return {
         temperature = 0,
         max_tokens = 16384,
         disable_tools = true,
+        generationConfig = {
+          thinkingConfig = {
+            thinkingBudget = 1024,
+            -- experiment with thinkingBudget = 0
+          },
+        },
       },
     },
     hints = { enabled = false },
