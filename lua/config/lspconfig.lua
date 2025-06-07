@@ -82,7 +82,6 @@ return {
       }
     })
 
-
     local handlers = {
       ["textDocument/hover"] =
           vim.lsp.buf.hover({
@@ -114,10 +113,9 @@ return {
       },
       jdtls = {},
       intelephense = {},
-      volar = {},
+      vue_ls = {},
       -- FIX this ltex_extra call is not working properly
       ltex = {
-        diagnostics = diagnostics,
         root_dir = require('lspconfig.util').root_pattern('*.tex'),
         ---@diagnostic disable-next-line: unused-local
         on_attach = function(c, b)
@@ -128,8 +126,6 @@ return {
             log_level = "none",
           }
         end,
-        capabilities = capabilities,
-        handlers = handlers,
         filetypes = { 'latex', 'tex', 'bib' },
         settings = {
           ltex = {
@@ -189,7 +185,7 @@ return {
       --     workingDirectory = { mode = 'auto' },
       --     useFlatConfig = false,
       --     experimental = {
-      --       useFlatConfig = true,
+      --       useFlatConfig = false,
       --     }
       --   }
       -- },
@@ -199,8 +195,7 @@ return {
       nil_ls = {},
       pyright = {},
       tailwindcss = {
-        -- TODO same as ts_ls
-        -- root_dir = require("lspconfig.util").root_pattern(".git"),
+        root_markers = { ".git" },
         settings = {
           tailwindCSS = {
             classFunctions = { "cva", "cn", "cx" },
@@ -208,12 +203,9 @@ return {
         }
       },
       ts_ls = {
-        -- TODO figure out a root_dir setting that will work for projects with no git dir in root and also
-        -- monorepo projects without spawning one ts_ls per package/app in the monorepo
-        -- root_dir = require("lspconfig.util").root_pattern(".git"),
+        root_markers = { ".git" },
         single_file_support = false,
         settings = {
-          -- TODO see if typescriptreact, javascriptreact are needed
           typescript = {
             inlayHints = {
               includeInlayParameterNameHints = "all",
