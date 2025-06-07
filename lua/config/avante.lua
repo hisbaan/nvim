@@ -19,7 +19,7 @@ return {
   },
   opts = {
     provider = "gemini_pro",
-    vendors = {
+    providers = {
       gemini_pro = {
         -- see https://ai.google.dev/gemini-api/docs/models/gemini
         __inherited_from = 'gemini',
@@ -27,9 +27,13 @@ return {
         endpoint = "https://generativelanguage.googleapis.com/v1beta/models",
         model = "gemini-2.5-pro-preview-05-06",
         timeout = 30000, -- ms
-        temperature = 0,
         max_tokens = 16384,
         disable_tools = true,
+        extra_request_body = {
+          generationConfig = {
+            temperature = 0.75,
+          }
+        }
       },
       gemini_flash = {
         -- see https://ai.google.dev/gemini-api/docs/models/gemini
@@ -38,15 +42,17 @@ return {
         endpoint = "https://generativelanguage.googleapis.com/v1beta/models",
         model = "gemini-2.5-flash-preview-04-17",
         timeout = 30000, -- ms
-        temperature = 0,
         max_tokens = 16384,
         disable_tools = true,
-        generationConfig = {
-          thinkingConfig = {
-            thinkingBudget = 1024,
-            -- experiment with thinkingBudget = 0
+        extra_request_body = {
+          generationConfig = {
+            thinkingConfig = {
+              temperature = 0.75,
+              thinkingBudget = 1024,
+              -- experiment with thinkingBudget = 0
+            },
           },
-        },
+        }
       },
     },
     hints = { enabled = false },
