@@ -128,6 +128,9 @@ return {
       },
       select_model = "<leader>am",
       select_history = "<leader>ah",
+      selector = {
+        provider = "snacks"
+      }
     },
   },
 }

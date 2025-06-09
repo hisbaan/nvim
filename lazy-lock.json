@@ -6,6 +6,7 @@
   "barbar.nvim": { "branch": "master", "commit": "3a74402bdf04745a762de83d5c5e88e3e9b0e2e0" },
   "blink.cmp": { "branch": "main", "commit": "86239578da58dff5ca43c3ebc992f184ee64354f" },
   "catppuccin": { "branch": "main", "commit": "fa42eb5e26819ef58884257d5ae95dd0552b9a66" },
+  "copilot.lua": { "branch": "master", "commit": "c1bb86abbed1a52a11ab3944ef00c8410520543d" },
   "diffview.nvim": { "branch": "main", "commit": "4516612fe98ff56ae0415a259ff6361a89419b0a" },
   "easyread.nvim": { "branch": "main", "commit": "0b07e315a4cd7d700c4a794bdddbec79fdc2628b" },
   "friendly-snippets": { "branch": "main", "commit": "572f5660cf05f8cd8834e096d7b4c921ba18e175" },

@@ -2,7 +2,8 @@ return {
   "hisbaan/supertab.nvim",
   dependencies = {
     "L3MON4D3/LuaSnip",
-    "supermaven-inc/supermaven-nvim"
+    "supermaven-inc/supermaven-nvim",
+    "zbirenbaum/copilot.lua",
   },
   lazy = false,
   keys = {
@@ -13,6 +14,7 @@ return {
   opts = function()
     local luasnip = require('luasnip')
     local supermaven = require('supermaven-nvim.completion_preview')
+    local copilot = require('copilot.suggestion')
 
     return {
       keys = {
@@ -23,6 +25,14 @@ return {
             end,
             action = function()
               luasnip.expand_or_jump()
+            end
+          },
+          {
+            condition = function()
+              return copilot.is_visible()
+            end,
+            action = function()
+              copilot.accept()
             end
           },
           {
