@@ -12,16 +12,16 @@ return {
   --- @module 'supertab'
   --- @type fun():supertab.Config
   opts = function()
-    local luasnip = require('luasnip')
-    local supermaven = require('supermaven-nvim.completion_preview')
-    local copilot = require('copilot.suggestion')
+    local has_luasnip, luasnip = pcall(require, 'luasnip')
+    local has_supermaven, supermaven = pcall(require, 'supermaven-nvim.completion_preview')
+    local has_copilot, copilot = pcall(require, 'copilot.suggestion')
 
     return {
       keys = {
         ['<Tab>'] = {
           {
             condition = function()
-              return luasnip.expand_or_jumpable()
+              return has_luasnip and luasnip.expand_or_jumpable()
             end,
             action = function()
               luasnip.expand_or_jump()
@@ -29,20 +29,20 @@ return {
           },
           {
             condition = function()
-              return copilot.is_visible()
+              return has_supermaven and supermaven.has_suggestion()
+            end,
+            action = function()
+              supermaven.on_accept_suggestion()
+            end,
+          },
+          {
+            condition = function()
+              return has_copilot and copilot.is_visible()
             end,
             action = function()
               copilot.accept()
             end
           },
-          {
-            condition = function()
-              return supermaven.has_suggestion()
-            end,
-            action = function()
-              supermaven.on_accept_suggestion()
-            end,
-          }
         }
       }
     }

@@ -1,7 +1,6 @@
 return {
   "zbirenbaum/copilot.lua",
-  cmd = "Copilot",
-  lazy = true,
+  enabled = false,
   opts = {
     panel = {
       enabled = false,
