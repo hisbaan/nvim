@@ -62,7 +62,6 @@ return {
       default = {
         'lsp',
         'path',
-        'snippets',
         'buffer',
       },
     },

@@ -25,7 +25,7 @@ return {
         __inherited_from = 'gemini',
         api_key_name = 'GEMINI_API_KEY',
         endpoint = "https://generativelanguage.googleapis.com/v1beta/models",
-        model = "gemini-2.5-pro-preview-05-06",
+        model = "gemini-2.5-pro",
         timeout = 30000, -- ms
         max_tokens = 16384,
         disable_tools = true,
@@ -40,17 +40,13 @@ return {
         __inherited_from = 'gemini',
         api_key_name = 'GEMINI_API_KEY',
         endpoint = "https://generativelanguage.googleapis.com/v1beta/models",
-        model = "gemini-2.5-flash-preview-04-17",
+        model = "gemini-2.5-flash",
         timeout = 30000, -- ms
         max_tokens = 16384,
         disable_tools = true,
         extra_request_body = {
           generationConfig = {
-            thinkingConfig = {
-              temperature = 0.75,
-              thinkingBudget = 1024,
-              -- experiment with thinkingBudget = 0
-            },
+            temperature = 0.75,
           },
         }
       },

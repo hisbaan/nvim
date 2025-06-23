@@ -195,7 +195,6 @@ return {
       nil_ls = {},
       pyright = {},
       tailwindcss = {
-        root_markers = { ".git" },
         settings = {
           tailwindCSS = {
             classFunctions = { "cva", "cn", "cx" },
