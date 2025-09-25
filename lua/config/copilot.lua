@@ -1,6 +1,6 @@
 return {
   "zbirenbaum/copilot.lua",
-  enabled = true,
+  enabled = require('flags').plugins.copilot,
   config = function()
     local opts = {
       panel = {

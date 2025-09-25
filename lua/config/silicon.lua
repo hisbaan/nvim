@@ -1,5 +1,6 @@
 return {
   "krivahtoo/silicon.nvim",
+  enabled = require('flags').plugins.silicon,
   build = "./install.sh",
   opts = {
     font = "MesloLGS Nerd Font Mono",

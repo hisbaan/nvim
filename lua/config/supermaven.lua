@@ -1,5 +1,6 @@
 return {
   "supermaven-inc/supermaven-nvim",
+  enabled = require('flags').plugins.supermaven,
   config = true,
   lazy = false,
   opts = function()
