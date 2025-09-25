@@ -168,16 +168,8 @@ return {
       bashls = {},
       clangd = {},
       cssls = {},
-      emmet_ls = {
-        filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less', 'php', 'vue' },
-        init_options = {
-          html = {
-            options = {
-              -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
-              ["output.selfClosingStyle"] = "xhtml"
-            },
-          },
-        }
+      emmet_language_server = {
+        filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less', 'vue' },
       },
       -- TODO fix eslint issues with useFlatConfig
       -- eslint = {
@@ -189,9 +181,11 @@ return {
       --     }
       --   }
       -- },
+      -- TODO make this safe: check for haskell install before including this
       hls = {},
       html = {},
       jsonls = {},
+      -- TODO make this safe: check for nix binary before including this
       nil_ls = {},
       pyright = {},
       tailwindcss = {
