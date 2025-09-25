@@ -1,3 +1,5 @@
+local flags = require('flags')
+
 return {
   'neovim/nvim-lspconfig',
   dependencies = {
@@ -6,9 +8,10 @@ return {
     'mason-org/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
   },
-  config = function()
+  init = function ()
     vim.o.signcolumn = "yes:1"
-
+  end,
+  config = function()
     local border = {
       { "╭", "FloatBorder" },
       { "─", "FloatBorder" },
@@ -113,7 +116,6 @@ return {
       },
       jdtls = {},
       intelephense = {},
-      vue_ls = {},
       -- FIX this ltex_extra call is not working properly
       ltex = {
         root_dir = require('lspconfig.util').root_pattern('*.tex'),
@@ -181,11 +183,9 @@ return {
       --     }
       --   }
       -- },
-      -- TODO make this safe: check for haskell install before including this
       hls = {},
       html = {},
       jsonls = {},
-      -- TODO make this safe: check for nix binary before including this
       nil_ls = {},
       pyright = {},
       tailwindcss = {
@@ -228,35 +228,39 @@ return {
       rust_analyzer = {},
       yamlls = {},
       taplo = {},
-      -- sqlls = {},
+      sqlls = {},
       zls = {},
     }
 
-    -- automatically install servers via mason-tool-installer
-    local ensure_installed = vim.tbl_keys(servers or {})
-    vim.list_extend(ensure_installed, {
-      'stylua',
-      'prettier',
-      'prettierd',
-      'yamlfmt',
-    })
-    require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+    -- filter out the servers disabled by `flags.lua`
+    local enabled_servers = {}
+    for name, cfg in pairs(servers) do
+      if flags.lsp.servers[name] then
+        enabled_servers[name] = cfg
+      end
+    end
 
-    -- servers are enabled by mason-lspconfig
-    require('mason-lspconfig').setup {
-      ensure_installed = {},
-      automatic_installation = false,
-      automatic_enable = true,
-    }
+    if flags.lsp.ensure_installed then
+      -- automatically install servers via mason-tool-installer
+      local ensure_installed = vim.tbl_keys(enabled_servers or {})
+      vim.list_extend(ensure_installed, {
+        'stylua',
+        'prettier',
+        'prettierd',
+        'yamlfmt',
+      })
+      require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+    end
 
     -- configure lsp servers
     -- OPTIM see if this can be sped up
-    for server, config in pairs(servers) do
+    for server, config in pairs(enabled_servers) do
       config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, config.capabilities or {})
       config.handlers = vim.tbl_deep_extend('force', {}, handlers, config.handlers or {})
       config.diagnostics = vim.tbl_deep_extend('force', {}, diagnostics, config.diagnostics or {})
 
       vim.lsp.config(server, config)
+      vim.lsp.enable(server)
     end
-  end,
+  end
 }
