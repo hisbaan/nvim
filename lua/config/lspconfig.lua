@@ -8,7 +8,7 @@ return {
     'mason-org/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
   },
-  init = function ()
+  init = function()
     vim.o.signcolumn = "yes:1"
   end,
   config = function()
@@ -170,6 +170,7 @@ return {
       bashls = {},
       clangd = {},
       cssls = {},
+      docker_compose_language_service = {},
       emmet_language_server = {
         filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less', 'vue' },
       },
@@ -226,7 +227,16 @@ return {
         },
       },
       rust_analyzer = {},
-      yamlls = {},
+      yamlls = {
+        settings = {
+          yaml = {
+            hover = true,
+            completion = true,
+            validate = true,
+            customTags = { "!secret scalar" },
+          }
+        }
+      },
       taplo = {},
       sqlls = {},
       zls = {},

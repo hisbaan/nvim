@@ -6,6 +6,7 @@ local default_config = {
       bashls = true,
       clangd = true,
       cssls = true,
+      docker_compose_language_service = true,
       emmet_language_server = true,
       html = true,
       intelephense = true,
