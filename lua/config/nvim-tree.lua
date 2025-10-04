@@ -23,7 +23,9 @@ return {
             api.config.mappings.default_on_attach(bufnr)
 
             -- override default delete mapping with trash
-            vim.keymap.set("n", "d", api.fs.trash, nvim_tree_opts("Trash"))
+            if vim.fn.executable("gtrash") == 1 or vim.fn.executable("trash-put") == 1 then
+                vim.keymap.set("n", "d", api.fs.trash, nvim_tree_opts("Trash"))
+            end
         end
 
         local function open_nvim_tree(data)
@@ -83,7 +85,15 @@ return {
                 exclude = {},
             },
             trash = {
-                cmd = "trash-put",
+                cmd = (function()
+                    if vim.fn.executable("gtrash") == 1 then
+                        return "gtrash put"
+                    elseif vim.fn.executable("trash-put") == 1 then
+                        return "trash-put"
+                    else
+                        return nil
+                    end
+                end)(),
                 require_confirm = true,
             },
             view = {
