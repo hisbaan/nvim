@@ -253,6 +253,7 @@ return {
     if flags.lsp.ensure_installed then
       -- automatically install servers via mason-tool-installer
       local ensure_installed = vim.tbl_keys(enabled_servers or {})
+      -- TODO check flags.lua and only install enabled formatters
       vim.list_extend(ensure_installed, {
         'stylua',
         'prettier',
