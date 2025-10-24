@@ -14,6 +14,7 @@ local default_config = {
       ltex = true,
       lua_ls = true,
       nil_ls = true,
+      openscad_lsp = true,
       pyright = true,
       rust_analyzer = true,
       sqlls = false,

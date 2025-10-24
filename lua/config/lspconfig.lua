@@ -188,6 +188,7 @@ return {
       html = {},
       jsonls = {},
       nil_ls = {},
+      openscad_lsp = {},
       pyright = {},
       tailwindcss = {
         settings = {
