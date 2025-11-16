@@ -3,10 +3,12 @@ return {
     -- event = {
     --     "BufEnter " .. vim.fn.expand "~" .. "/Documents/obsidian**",
     -- },
-    enabled = false,
-    ft = {"markdown"},
+    enabled = true,
+    ft = { "markdown" },
+    --- @module 'dataview'
+    --- @type dataview.Config
     opts = {
         vault_dir = "~/Documents/obsidian/",
-        buffer_type = "float",
+        buffer_kind = "float",
     }
 }
