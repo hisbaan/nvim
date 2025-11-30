@@ -3,7 +3,7 @@ return {
     -- event = {
     --     "BufEnter " .. vim.fn.expand "~" .. "/Documents/obsidian**",
     -- },
-    enabled = true,
+    enabled = false,
     ft = { "markdown" },
     --- @module 'dataview'
     --- @type dataview.Config
