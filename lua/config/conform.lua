@@ -31,6 +31,7 @@ return {
 				javascriptreact = typescriptFormatters,
 				typescript = typescriptFormatters,
 				typescriptreact = typescriptFormatters,
+				json = typescriptFormatters,
 				openscad = { "topiary" },
 			},
 		})
