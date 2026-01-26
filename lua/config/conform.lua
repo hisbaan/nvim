@@ -12,11 +12,11 @@ return {
 		local conform = require("conform")
 
 		-- TODO flags.lua support
-		local typescriptFormatters = { "prettier", stop_after_first = true }
+		local typescriptFormatters = { "prettier", "prettierd", stop_after_first = true }
 
 		conform.setup({
 			formatters = {
-				-- TODO read buffer, write to buffer instead of formatting the file
+				-- TODO read buffer, write to buffer instead of formatting the file, maybe some variant of :%!
 				topiary = {
 					inherit = false,
 					command = "topiary",
