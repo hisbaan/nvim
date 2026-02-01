@@ -33,6 +33,7 @@ return {
 				typescriptreact = typescriptFormatters,
 				json = typescriptFormatters,
 				openscad = { "topiary" },
+				go = { "goimports", "gofmt" },
 			},
 		})
 	end,

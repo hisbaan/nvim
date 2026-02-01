@@ -184,6 +184,7 @@ return {
       --     }
       --   }
       -- },
+      gopls = {},
       hls = {},
       html = {},
       jsonls = {},
@@ -260,6 +261,7 @@ return {
         'prettier',
         'prettierd',
         'yamlfmt',
+        'goimports',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
     end
