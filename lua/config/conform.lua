@@ -12,7 +12,7 @@ return {
 		local conform = require("conform")
 
 		-- TODO flags.lua support
-		local typescriptFormatters = { "prettier", "prettierd", stop_after_first = true }
+		local prettier = { "prettier", "prettierd", stop_after_first = true }
 
 		conform.setup({
 			formatters = {
@@ -26,12 +26,13 @@ return {
 			formatters_by_ft = {
 				lua = { "stylua" },
 				yaml = { "yamlfmt" },
-				markdown = typescriptFormatters,
-				javascript = typescriptFormatters,
-				javascriptreact = typescriptFormatters,
-				typescript = typescriptFormatters,
-				typescriptreact = typescriptFormatters,
-				json = typescriptFormatters,
+				markdown = prettier,
+				javascript = prettier,
+				javascriptreact = prettier,
+				typescript = prettier,
+				typescriptreact = prettier,
+				json = prettier,
+				html = prettier,
 				openscad = { "topiary" },
 				go = { "goimports", "gofmt" },
 			},
