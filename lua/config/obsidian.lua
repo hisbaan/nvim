@@ -13,7 +13,6 @@ return {
         "nvim-lua/plenary.nvim",
         -- Optional
         "nvim-telescope/telescope.nvim",
-        "nvim-treesitter/nvim-treesitter",
         "saghen/blink.cmp",
     },
     opts = {
