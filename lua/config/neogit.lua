@@ -101,8 +101,8 @@ return {
         },
         signs = {
             -- { CLOSED, OPENED }
-            section = { "", "" },
-            item = { "", "" },
+            section = { "›", "" },
+            item = { "›", "" },
             hunk = { "", "" },
         },
         -- Each Integration is auto-detected through plugin presence, however, it can be disabled by setting to `false`
