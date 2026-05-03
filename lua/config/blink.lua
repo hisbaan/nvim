@@ -1,6 +1,6 @@
 return {
   'saghen/blink.cmp',
-  dependencies = { 'rafamadriz/friendly-snippets' },
+  dependencies = { 'rafamadriz/friendly-snippets', 'saghen/blink.lib' },
   build = 'cargo build --release',
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
@@ -37,12 +37,14 @@ return {
       enabled = true,
       -- use 'inherit' to inherit mappings from top level `keymap` config
       keymap = { preset = 'cmdline' },
-      sources = function()
-        local type = vim.fn.getcmdtype()
-        if type == '/' or type == '?' then return { 'buffer' } end
-        if type == ':' or type == '@' then return { 'cmdline' } end
-        return {}
-      end,
+      sources = {
+        default = function()
+          local type = vim.fn.getcmdtype()
+          if type == '/' or type == '?' then return { 'buffer' } end
+          if type == ':' or type == '@' then return { 'cmdline' } end
+          return {}
+        end,
+      },
       completion = {
         trigger = {
           show_on_blocked_trigger_characters = {},
