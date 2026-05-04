@@ -1,24 +1,23 @@
 return {
 	"romus204/tree-sitter-manager.nvim",
 	init = function()
-		vim.treesitter.language.register("tsx", "typescriptreact")
-		vim.treesitter.language.register("jsx", "javascriptreact")
-		vim.treesitter.language.register("json", "jsonc")
+		-- table mapping from parser -> filetype for overrides
+		local mappings = {
+			tsx = "typescriptreact",
+			jsx = "javascriptreact",
+			json = "jsonc",
+			gotmpl = "template",
+		}
 
-		vim.api.nvim_create_autocmd("FileType", {
-			pattern = "typescriptreact",
-			callback = function(args) pcall(vim.treesitter.start, args.buf, "tsx") end,
-		})
-
-		vim.api.nvim_create_autocmd("FileType", {
-			pattern = "javascriptreact",
-			callback = function(args) pcall(vim.treesitter.start, args.buf, "jsx") end,
-		})
-
-		vim.api.nvim_create_autocmd("FileType", {
-			pattern = "jsonc",
-			callback = function(args) pcall(vim.treesitter.start, args.buf, "json") end,
-		})
+		for parser, ft in pairs(mappings) do
+			vim.treesitter.language.register(parser, ft)
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = ft,
+				callback = function(args)
+					pcall(vim.treesitter.start, args.buf, parser)
+				end,
+			})
+		end
 	end,
 	dependencies = {}, -- tree-sitter CLI must be installed system-wide
 	opts = {
