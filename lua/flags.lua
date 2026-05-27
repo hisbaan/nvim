@@ -27,9 +27,12 @@ local default_config = {
       zls = true,
     },
     formatters = {
-      stylua = true,
+      goimports = true,
+      oxfmt = true,
       prettier = true,
       prettierd = true,
+      stylua = true,
+      taplo = true,
       yamlfmt = true,
     }
   },

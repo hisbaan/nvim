@@ -289,11 +289,13 @@ return {
       local ensure_installed = vim.tbl_keys(enabled_servers or {})
       -- TODO check flags.lua and only install enabled formatters
       vim.list_extend(ensure_installed, {
-        'stylua',
+        'goimports',
+        'oxfmt',
         'prettier',
         'prettierd',
+        'stylua',
+        'taplo',
         'yamlfmt',
-        'goimports',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
     end
