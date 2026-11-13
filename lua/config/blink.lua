@@ -1,7 +1,7 @@
 return {
   'saghen/blink.cmp',
   dependencies = { 'rafamadriz/friendly-snippets', 'saghen/blink.lib' },
-  build = function() require('blink.cmp').build():wait(60000) end,
+  build = function() require('blink.cmp').build():pwait() end,
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
