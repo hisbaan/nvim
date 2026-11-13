@@ -37,7 +37,7 @@ local default_config = {
     }
   },
   plugins = {
-    copilot = true,
+    copilot = false,
     supermaven = false,
     silicon = false,
   },
