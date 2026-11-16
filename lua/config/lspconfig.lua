@@ -228,7 +228,7 @@ return {
           }
         },
       },
-      tsgo = {
+      tsc = {
         root_markers = { ".git" },
         single_file_support = false,
         settings = {
